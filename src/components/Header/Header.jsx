@@ -1,7 +1,7 @@
-import LogoIcon from '@/assets/icons/LogoIcon/LogoIcon'
+import GreenLogoIcon from '@/assets/icons/LogoIcon/GreenLogoIcon'
 import SearchIcon from '@/assets/icons/SearchIcon/SearchIcon'
 import InputIcon from '../InputIcon/InputIcon'
-import { ContainerLogo, HeaderContainer, LogoText, Nav, NavContainer, NavItem, NavLink, NavList } from './styles/Header.style'
+import { ContainerLogo, HeaderContainer, LogoIcon, LogoText, Nav, NavContainer, NavItem, NavLink, NavList } from './styles/Header.style'
 
 const Header = () => {
   return (
@@ -9,7 +9,9 @@ const Header = () => {
       <Nav>
         <NavContainer>
           <ContainerLogo href="/">
-            <LogoIcon width="60" height="60" />
+            <LogoIcon size={60}>
+              <GreenLogoIcon width="60" height="60" />
+            </LogoIcon>
             <LogoText>MarketHub</LogoText>
           </ContainerLogo>
           <InputIcon
@@ -17,9 +19,12 @@ const Header = () => {
             placeholder="Buscando por um serviço?"
             icon={SearchIcon}
             iconSize={25}
-            fill="#a9a9a9"
-            style={{ marginLeft: '1em', height: 40, padding: 5 }}
+            fill="#44BB01"
             borderRadius={15}
+            borderColor="#44BB01"
+            borderColorHover="#44BB01"
+            shadowColor="#44bb0142"
+            style={{ marginLeft: '1em', height: 40, padding: 5 }}
           />
         </NavContainer>
         <NavList>

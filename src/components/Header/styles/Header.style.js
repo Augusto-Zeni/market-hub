@@ -1,7 +1,8 @@
 import styled from 'styled-components'
+import isNil from 'lodash/isNil'
 
 export const HeaderContainer = styled.header`
-  background-color: #1b1b1b;
+  background-color: #F3F4EE;
   position: fixed;
   top: 0;
   left: 0;
@@ -15,8 +16,15 @@ export const HeaderContainer = styled.header`
   box-shadow: 0 0px 20px #ffffff40;
 `
 
+export const LogoIcon = styled.div`
+  box-shadow: 0 0px 20px #9090906b;
+  width: ${({ size }) => !isNil(size) ? `${size}px` : '60px'};
+  height: ${({ size }) => !isNil(size) ? `${size}px` : '60px'};
+  border-radius: 30px;
+`
+
 export const LogoText = styled.a`
-  color: #fff;
+  color: #44BB01;
   font-weight: bold;
   font-size: 1em;
   margin-inline: 5px;
@@ -54,7 +62,7 @@ export const NavItem = styled.li`
 `
 
 export const NavLink = styled.a`
-  color: #a9a9a9;
+  color: #3b3b3b;
   text-decoration: none;
   padding: 6px 15px;
   border-radius: 20px;
@@ -65,8 +73,8 @@ export const NavLink = styled.a`
 
   &:hover,
   &.active {
-    border: 1px solid #3592e7;
-    box-shadow: 0 0px 16px #3592e79e;
+    border: 1px solid #44BB01;
+    box-shadow: 0 0px 10px #44bb0142;
     transform: translateY(-5px);
   }
 `

@@ -10,16 +10,16 @@ export const Container = styled.div`
   border-radius: ${({ borderRadius }) => (!isNil(borderRadius) ? `${borderRadius}px` : '35px')};
   background: transparent;
   color: #3b3b3b;
-  border: 1px solid #3b3b3b;
+  border: ${({ borderColor }) => `1px solid ${borderColor}`};
   transition:
     transform 0.3s,
     box-shadow 0.3s;
 
   &:hover,
   &:focus-within {
-    border: 1px solid #3592e7;
-    box-shadow: 0 0px 16px #3592e79e;
-    transform: translateY(-1px);
+    border: ${({ borderColorHover }) => `1px solid ${borderColorHover}`};
+    box-shadow: ${({ shadowColor }) => `0 0px 10px ${shadowColor}`};
+    transform: translateY(-1px) translateX(-1px);
   }
 `
 
@@ -29,9 +29,9 @@ export const InputBox = styled.input`
   padding-left: 5px;
   width: 100%;
   background: transparent;
-  color: #a9a9a9;
+  color: #3b3b3b;
 
   &:focus {
-    color: #a9a9a9;
+    color: #3b3b3b;
   }
 `

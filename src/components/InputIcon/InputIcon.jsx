@@ -1,9 +1,9 @@
 import PropTypes from 'prop-types'
 import { Container, InputBox } from './styles/InputIcon.style'
 
-const InputIcon = ({ icon: Icon, borderRadius, iconSize, placeholder, style, fill }) => {
+const InputIcon = ({ icon: Icon, borderRadius, iconSize, placeholder, style, fill, borderColor, borderColorHover, shadowColor }) => {
   return (
-    <Container borderRadius={borderRadius} style={style}>
+    <Container borderColor={borderColor} borderColorHover={borderColorHover} shadowColor={shadowColor} borderRadius={borderRadius} style={style}>
       <Icon width={`${iconSize}px`} height={`${iconSize}px`} fill={fill} />
       <InputBox placeholder={placeholder} />
     </Container>
@@ -17,6 +17,9 @@ InputIcon.propTypes = {
   fill: PropTypes.string,
   placeholder: PropTypes.string,
   style: PropTypes.object,
+  borderColor: PropTypes.string,
+  borderColorHover: PropTypes.string,
+  shadowColor: PropTypes.string,
 }
 
 InputIcon.defaultProps = {
@@ -25,6 +28,9 @@ InputIcon.defaultProps = {
   placeholder: 'Pesquisar',
   fill: '#fff',
   style: {},
+  borderColor: '#3b3b3b',
+  borderColorHover: '#3b3b3b',
+  shadowColor: '',
 }
 
 export default InputIcon
