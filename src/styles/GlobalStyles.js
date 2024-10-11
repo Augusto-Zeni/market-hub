@@ -1,9 +1,20 @@
 import { createGlobalStyle } from 'styled-components'
 
 const GlobalStyles = createGlobalStyle`
-    padding:0;
-    margin:0;
-    box-sizing: border-box;
+    * {
+        font-family: "Montserrat", sans-serif;
+        padding:0;
+        margin:0;
+        box-sizing: border-box;
+        scroll-behavior: smooth;
+    }
+
+    body {
+        min-height: 100vh;
+        overflow-x: hidden;
+        background-color: #242424;
+        color: #a9a9a9;
+    }
 `
 
 export default GlobalStyles
