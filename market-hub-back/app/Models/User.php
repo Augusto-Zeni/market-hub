@@ -9,6 +9,10 @@ use Illuminate\Notifications\Notifiable;
 
 class User extends Authenticatable
 {
+    public const USER_CONSUMER = 'CONSUMER';
+
+    public const USER_ = 'MERCHANT';
+
     use HasFactory, Notifiable;
 
     /**
@@ -20,6 +24,7 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
+        'user_type'
     ];
 
     /**
