@@ -14,6 +14,8 @@ class RegisterService
 
     public function register(array $data): User
     {
-        return User::create($data);
+        $user = User::create($data);
+
+        return $user;
     }
 }
