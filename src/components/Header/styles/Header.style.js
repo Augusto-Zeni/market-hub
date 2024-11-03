@@ -2,7 +2,7 @@ import styled from 'styled-components'
 import isNil from 'lodash/isNil'
 
 export const HeaderContainer = styled.header`
-  background-color: #F3F4EE;
+  background-color: #f3f4ee;
   position: fixed;
   top: 0;
   left: 0;
@@ -18,16 +18,17 @@ export const HeaderContainer = styled.header`
 
 export const LogoIcon = styled.div`
   box-shadow: 0 0px 20px #9090906b;
-  width: ${({ size }) => !isNil(size) ? `${size}px` : '60px'};
-  height: ${({ size }) => !isNil(size) ? `${size}px` : '60px'};
+  width: ${({ size }) => (!isNil(size) ? `${size}px` : '60px')};
+  height: ${({ size }) => (!isNil(size) ? `${size}px` : '60px')};
   border-radius: 30px;
 `
 
-export const LogoText = styled.a`
-  color: #44BB01;
+export const LogoText = styled.span`
+  color: #44bb01;
   font-weight: bold;
   font-size: 1em;
   margin-inline: 5px;
+  padding-left: 5px;
 `
 
 export const ContainerLogo = styled.a`
@@ -73,7 +74,7 @@ export const NavLink = styled.a`
 
   &:hover,
   &.active {
-    border: 1px solid #44BB01;
+    border: 1px solid #44bb01;
     box-shadow: 0 0px 10px #44bb0142;
     transform: translateY(-5px);
   }

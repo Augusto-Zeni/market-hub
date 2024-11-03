@@ -1,6 +1,6 @@
 import PropTypes from 'prop-types'
 
-const GreenLogoIcon = ({ width, height }) => {
+const GreenLogoIcon = ({ width = '25px', height = '25px' }) => {
   return (
     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 700 700" width={width} height={height} fill="none">
       <rect xmlns="http://www.w3.org/2000/svg" width="700" height="700" rx="350" fill="#F3F4EE" />
@@ -18,11 +18,6 @@ const GreenLogoIcon = ({ width, height }) => {
 GreenLogoIcon.propTypes = {
   width: PropTypes.string,
   height: PropTypes.string,
-}
-
-GreenLogoIcon.defaultProps = {
-  width: '25px',
-  height: '25px',
 }
 
 export default GreenLogoIcon

@@ -1,9 +1,9 @@
 import PerfilContainer from "@/containers/PerfilContainer/PerfilContainer"
 
-const Home = () => {
+const Profile = () => {
   return (
     <PerfilContainer />
   )
 }
 
-export default Home
+export default Profile

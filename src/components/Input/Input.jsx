@@ -1,17 +1,15 @@
 import PropTypes from 'prop-types'
-import { Container, InputBox } from './styles/InputIcon.style'
+import { Container, InputBox } from './styles/Input.style'
 
-const InputIcon = ({
-  id = 'input-icon',
-  icon: Icon,
+const Input = ({
+  id = 'input',
   borderRadius = 35,
-  iconSize = 20,
   placeholder = 'Pesquisar',
   style = {},
-  fill = '#fff',
   borderColor = '#3b3b3b',
   borderColorHover = '#3b3b3b',
   shadowColor = '',
+  type = 'text',
 }) => {
   return (
     <Container
@@ -21,23 +19,21 @@ const InputIcon = ({
       $borderRadius={borderRadius}
       style={style}
     >
-      <Icon width={`${iconSize}px`} height={`${iconSize}px`} fill={fill} />
-      <InputBox id={id} placeholder={placeholder} />
+      <InputBox id={id} type={type} placeholder={placeholder} />
     </Container>
   )
 }
 
-InputIcon.propTypes = {
+Input.propTypes = {
   id: PropTypes.string,
-  icon: PropTypes.elementType.isRequired,
   borderRadius: PropTypes.number,
-  iconSize: PropTypes.number,
   fill: PropTypes.string,
   placeholder: PropTypes.string,
   style: PropTypes.object,
   borderColor: PropTypes.string,
   borderColorHover: PropTypes.string,
   shadowColor: PropTypes.string,
+  type: PropTypes.string,
 }
 
-export default InputIcon
+export default Input
