@@ -13,7 +13,7 @@ export const HeaderContainer = styled.header`
   justify-content: space-between;
   align-items: center;
   z-index: 999;
-  box-shadow: 0 0px 20px #ffffff40;
+  box-shadow: rgba(33, 35, 38, 0.1) 0px 10px 10px -10px;
 `
 
 export const LogoIcon = styled.div`
@@ -71,6 +71,7 @@ export const NavLink = styled.a`
     transform 0.3s,
     box-shadow 0.3s;
   border: 1px solid #ffffff00;
+  cursor: pointer;
 
   &:hover,
   &.active {

@@ -2,7 +2,7 @@ import { createGlobalStyle } from 'styled-components'
 
 const GlobalStyles = createGlobalStyle`
     * {
-        font-family: "Montserrat", sans-serif;
+        font-family: "Inter", serif;
         padding:0;
         margin:0;
         box-sizing: border-box;

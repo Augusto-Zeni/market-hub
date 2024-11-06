@@ -10,7 +10,7 @@ export const ContentLoginModal = style.div`
 
 export const ContainerImageLoginModal = style.div`
   width: 27rem;
-  background-image: url('../../../../public/login-modal-img.png');
+  background-image: url('../../../../login-modal-img.png');
   background-size: cover;
   background-position: center;
 `

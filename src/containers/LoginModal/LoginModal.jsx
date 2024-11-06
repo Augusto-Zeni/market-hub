@@ -90,7 +90,7 @@ const LoginModal = ({ open, setOpen }) => {
                     style={{ margin: '1rem 0', height: 40, padding: 5 }}
                     borderRadius={15}
                   />
-                  <Button id="cadastrar-button" text="Cadastrar" />
+                  <Button id="cadastrar-button" text="Cadastrar" style={{ marginTop: '1rem' }} />
                   <ContentSetarLogin>
                     <span>Já possui uma conta?</span>
                     <TextSpan onClick={() => setIsLogin(true)}>Faça login</TextSpan>

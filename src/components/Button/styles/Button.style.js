@@ -1,11 +1,11 @@
 import styled from 'styled-components'
 
-export const Button = styled.button`
+export const ButtonComponent = styled.button`
   padding: 1em;
   width: 100%;
   display: flex;
   justify-content: center;
-  margin-top: 1rem;
+  align-items: center;
   border-radius: 25px;
   border: 0;
   background: #44bb01;

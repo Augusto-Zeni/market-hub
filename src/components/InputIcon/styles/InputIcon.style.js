@@ -2,11 +2,8 @@ import styled from 'styled-components'
 import isNil from 'lodash/isNil'
 
 export const Container = styled.div`
-  background-color: white;
-  width: 100%;
   display: flex;
   align-items: center;
-  margin: auto;
   border-radius: ${({ $borderRadius }) => (!isNil($borderRadius) ? `${$borderRadius}px` : '35px')};
   background: transparent;
   color: #3b3b3b;

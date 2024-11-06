@@ -1,13 +1,18 @@
 import PropTypes from 'prop-types'
-import { Button } from './styles/Button.style'
+import { ButtonComponent } from './styles/Button.style'
 
-const Input = ({ id = 'button', text }) => {
-  return <Button id={id}>{text}</Button>
+const Button = ({ id = 'button', text, style = {} }) => {
+  return (
+    <ButtonComponent id={id} style={style}>
+      {text}
+    </ButtonComponent>
+  )
 }
 
-Input.propTypes = {
+Button.propTypes = {
   id: PropTypes.string,
   text: PropTypes.string.isRequired,
+  style: PropTypes.object,
 }
 
-export default Input
+export default Button
