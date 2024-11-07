@@ -18,10 +18,10 @@ import {
   Title,
 } from './styles/ServiceCard.style'
 
-const HotelCard = ({ cardInfos }) => {
+const HotelCard = ({ cardInfos, hasBoxShadow = true }) => {
   return (
     <CardWrapper>
-      <CardContainer>
+      <CardContainer $hasBoxShadow={hasBoxShadow}>
         <ImageContainer>
           <Image src={cardInfos.img} alt="service-image" />
           <RatingBadge>
@@ -53,6 +53,7 @@ const HotelCard = ({ cardInfos }) => {
 
 HotelCard.propTypes = {
   cardInfos: PropTypes.object,
+  hasBoxShadow: PropTypes.bool,
 }
 
 export default HotelCard

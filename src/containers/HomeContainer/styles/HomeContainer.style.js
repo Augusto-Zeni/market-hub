@@ -47,20 +47,7 @@ export const CardsContainer = styled.div`
   justify-items: center;
 `
 
-export const TitleCardsContainer = styled.div`
-  padding: 2rem 1rem 1rem 1rem;
-  display: flex;
-  align-items: center;
-  gap: 10px;
-`
-
-export const TitleCards = styled.i`
-  color: #44bb01;
-  font-size: 2.5rem;
-  font-weight: 500;
-`
-
-export const TitleLine = styled.hr`
+export const Line = styled.hr`
   flex: 1;
   margin: 0;
   border: none;
@@ -72,5 +59,5 @@ export const ButtonContainer = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
-  padding-bottom: 2rem;
+  padding: 3rem 1rem 3rem 1rem;
 `

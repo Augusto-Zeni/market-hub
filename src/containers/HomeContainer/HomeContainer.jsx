@@ -2,6 +2,7 @@ import SearchIcon from '@/assets/icons/SearchIcon/SearchIcon'
 import Button from '@/components/Button/Button'
 import InputIcon from '@/components/InputIcon/InputIcon'
 import ServiceCard from '@/components/ServiceCard/ServiceCard'
+import TitleWithLine from '@/components/TitleWithLine/TitleWithLine'
 import map from 'lodash/map'
 import {
   BannerContainer,
@@ -9,11 +10,9 @@ import {
   CardsContainer,
   Container,
   FormSearch,
+  Line,
   SubtitleBanner,
   TitleBanner,
-  TitleCards,
-  TitleCardsContainer,
-  TitleLine,
 } from './styles/HomeContainer.style'
 
 const cardsInfos = [
@@ -164,10 +163,7 @@ const HomeContainer = () => {
         </FormSearch>
       </BannerContainer>
 
-      <TitleCardsContainer>
-        <TitleCards>Serviços adicionados recentemente</TitleCards>
-        <TitleLine />
-      </TitleCardsContainer>
+      <TitleWithLine title="Serviços adicionados recentemente" styleContainer={{ padding: '3rem 1rem 2rem 1rem' }} />
 
       <CardsContainer>
         {map(cardsInfos, info => (
@@ -175,7 +171,9 @@ const HomeContainer = () => {
         ))}
       </CardsContainer>
       <ButtonContainer>
-        <Button id="mostrar-mais-services" text="Mostrar Mais" style={{ width: '8rem' }} />
+        <Line />
+        <Button id="mostrar-mais-services" text="Mostrar Mais" style={{ width: '8rem', margin: '0 1rem' }} />
+        <Line />
       </ButtonContainer>
     </Container>
   )

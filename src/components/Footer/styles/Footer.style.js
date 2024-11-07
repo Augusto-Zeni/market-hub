@@ -3,7 +3,7 @@ import isNil from 'lodash/isNil'
 
 export const Container = styled.footer`
   padding: 3rem;
-  height: 18rem;
+  min-height: 18rem;
   background: #dadada;
 `
 

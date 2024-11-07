@@ -10,12 +10,12 @@ export const CardContainer = styled.div`
   transition:
     transform 0.3s,
     box-shadow 0.3s;
-  box-shadow: 0 10px 50px rgba(0, 0, 0, 0.1);
+  box-shadow: ${({ $hasBoxShadow }) => ($hasBoxShadow ? '0 10px 50px rgba(0, 0, 0, 0.1)' : 'unset')};
   transform: translateY(0);
   cursor: pointer;
 
   &:hover {
-    box-shadow: 0 20px 75px rgba(0, 0, 0, 0.1);
+    box-shadow: ${({ $hasBoxShadow }) => ($hasBoxShadow ? '0 20px 75px rgba(0, 0, 0, 0.1)' : 'unset')};
     transform: translateY(-3px);
   }
 `
