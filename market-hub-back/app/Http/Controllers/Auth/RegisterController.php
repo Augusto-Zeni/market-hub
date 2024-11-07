@@ -11,6 +11,12 @@ use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Throwable;
 
+/**
+ * @schema(
+ *  schema="register-response"
+ *  type="object"
+ * )
+ */
 class RegisterController extends Controller
 {
     public function __construct(
