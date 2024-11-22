@@ -18,4 +18,14 @@ class UserProfileRepository
         $data['user_id'] = $user_id;
         return $this->model->create($data);
     }
+
+    public function update(array $data, int $user_id): UserProfile
+    {
+        $userProfile = $this->model
+            ->where('user_id', '=', $user_id)
+            ->firstOrFail();
+        $userProfile->fill($data);
+        $userProfile->save();
+        return $userProfile;
+    }
 }

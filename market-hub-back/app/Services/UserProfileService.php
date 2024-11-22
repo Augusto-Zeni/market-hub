@@ -20,4 +20,9 @@ class UserProfileService
     {
         return $this->repository->create($data, $user_id);
     }
+
+    public function updateUserProfile(array $data, int $user_id): UserProfile
+    {
+        return $this->repository->update($data, $user_id);
+    }
 }
