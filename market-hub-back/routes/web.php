@@ -5,6 +5,7 @@ declare(strict_types=1);
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\DocumentationController;
+use App\Http\Controllers\UserProfileController;
 use Illuminate\Routing\Router;
 use Illuminate\Support\Facades\Route;
 
@@ -26,4 +27,6 @@ Route::prefix('api')->group(function () {
         Route::post('/logout', [LoginController::class, 'logout'])->middleware('auth:sanctum');
     });
     
+
+    Route::post('/profile/{user_id}', [UserProfileController::class, 'create']);
 });
