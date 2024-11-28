@@ -16,18 +16,18 @@ class UserProfileService
         
     }
 
-    public function createUserProfile(array $data, int $user_id): UserProfile
+    public function createUserProfile(array $data): UserProfile
     {
-        return $this->repository->create($data, $user_id);
+        return $this->repository->create($data);
     }
 
-    public function updateUserProfile(array $data, int $user_id): UserProfile
+    public function updateUserProfile(array $data, int $profile_id): UserProfile
     {
-        return $this->repository->update($data, $user_id);
+        return $this->repository->update($data, $profile_id);
     }
 
-    public function getProfileByUserId(int $user_id): UserProfile
+    public function getProfileByUserId(int $profile_id): UserProfile
     {
-        return $this->repository->getByUserId($user_id);
+        return $this->repository->find($profile_id);
     }
 }

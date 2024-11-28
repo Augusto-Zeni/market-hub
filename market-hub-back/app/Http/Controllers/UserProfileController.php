@@ -20,22 +20,14 @@ class UserProfileController extends Controller
     /**
      * @OA\Post(
      *     tags={"User profile"},
-     *     path="/profile/{user_id}",
+     *     path="/profile",
      *     description="Cria perfil do usuário",
      *     tags={"UserProfile"},
-     *     @OA\Parameter(
-     *         description="Id do usuário",
-     *         in="path",
-     *         name="user_id",
-     *         required=true,
-     *         @OA\Schema(
-     *             type="string"
-     *         )
-     *     ),
      *     @OA\RequestBody(
      *         required=true,
      *         @OA\JsonContent(
-     *             required={"job_role", "zipcode", "about", "phone"},
+     *             required={"user_id", "job_role", "zipcode", "about", "phone"},
+     *             @OA\Property(property="user_id", type="int", example="1"),
      *             @OA\Property(property="job_role", type="string", example="Encanador"),
      *             @OA\Property(property="zipcode", type="string", example="99999999"),
      *             @OA\Property(property="about", type="string", example="texto texto texto texto texto"),
@@ -59,6 +51,7 @@ class UserProfileController extends Controller
     public function create(Request $request)
     {
         $validated = $request->validate([
+            'user_id' => 'required',
             'job_role' => 'required|string',
             'zipcode' => 'required|string',
             'about' => 'required|string',
@@ -66,10 +59,7 @@ class UserProfileController extends Controller
         ]);
 
         try {
-            $userProfile = $this->service->createUserProfile(
-                $validated,
-                (int) $request->route('user_id')
-            );
+            $userProfile = $this->service->createUserProfile($validated);
 
             return response([
                 'message' => 'Profile created!',
@@ -87,13 +77,13 @@ class UserProfileController extends Controller
     /**
      * @OA\Put(
      *     tags={"User profile"},
-     *     path="/profile/{user_id}",
+     *     path="/profile/{profile_id}",
      *     description="Edita perfil do usuário",
      *     tags={"UserProfile"},
      *     @OA\Parameter(
-     *         description="Id do usuário",
+     *         description="Id do perfil",
      *         in="path",
-     *         name="user_id",
+     *         name="profile_id",
      *         required=true,
      *         @OA\Schema(
      *             type="string"
@@ -122,7 +112,7 @@ class UserProfileController extends Controller
      *     )
      * )
      */
-    public function update(Request $request)
+    public function update(int $profile_id, Request $request)
     {
         $validated = $request->validate([
             'job_role' => 'sometimes|string',
@@ -134,7 +124,7 @@ class UserProfileController extends Controller
         try {
             $userProfile = $this->service->updateUserProfile(
                 $validated,
-                (int) $request->route('user_id')
+                $profile_id
             );
 
             return response([
@@ -153,25 +143,16 @@ class UserProfileController extends Controller
     /**
      * @OA\Get(
      *     tags={"User profile"},
-     *     path="/profile/{user_id}",
-     *     description="Edita perfil do usuário",
+     *     path="/profile/{profile_id}",
+     *     description="Obtém perfil do usuário",
      *     tags={"UserProfile"},
      *     @OA\Parameter(
-     *         description="Id do usuário",
+     *         description="Id do perfil",
      *         in="path",
-     *         name="user_id",
+     *         name="profile_id",
      *         required=true,
      *         @OA\Schema(
      *             type="string"
-     *         )
-     *     ),
-     *     @OA\RequestBody(
-     *         required=true,
-     *         @OA\JsonContent(
-     *             @OA\Property(property="job_role", type="string", example="Encanador"),
-     *             @OA\Property(property="zipcode", type="string", example="99999999"),
-     *             @OA\Property(property="about", type="string", example="texto texto texto texto texto"),
-     *             @OA\Property(property="phone", type="string", example="51999999999")
      *         )
      *     ),
      *     @OA\Response(

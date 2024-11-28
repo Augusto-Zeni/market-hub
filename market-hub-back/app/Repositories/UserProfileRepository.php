@@ -13,26 +13,21 @@ class UserProfileRepository
     ) {
     }
 
-    public function create(array $data, int $user_id): UserProfile
+    public function create(array $data): UserProfile
     {
-        $data['user_id'] = $user_id;
         return $this->model->create($data);
     }
 
-    public function update(array $data, int $user_id): UserProfile
+    public function update(array $data, int $profile_id): UserProfile
     {
-        $userProfile = $this->model
-            ->where('user_id', '=', $user_id)
-            ->firstOrFail();
+        $userProfile = $this->model->findOrFail($profile_id);
         $userProfile->fill($data);
         $userProfile->save();
         return $userProfile;
     }
 
-    public function getByUserId(int $user_id): UserProfile
+    public function find(int $profile_id): UserProfile
     {
-        return $this->model
-        ->where('user_id', '=', $user_id)
-        ->firstOrFail();
+        return $this->model->findOrFail($profile_id);
     }
 }
