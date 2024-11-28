@@ -30,4 +30,5 @@ Route::prefix('api')->group(function () {
 
     Route::post('/profile/{user_id}', [UserProfileController::class, 'create']);
     Route::put('/profile/{user_id}', [UserProfileController::class, 'update']);
+    Route::get('/profile/{user_id}', [UserProfileController::class, 'show']);
 });

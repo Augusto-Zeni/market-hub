@@ -149,4 +149,60 @@ class UserProfileController extends Controller
             ], 500);
         }
     }
+
+    /**
+     * @OA\Get(
+     *     tags={"User profile"},
+     *     path="/profile/{user_id}",
+     *     description="Edita perfil do usuário",
+     *     tags={"UserProfile"},
+     *     @OA\Parameter(
+     *         description="Id do usuário",
+     *         in="path",
+     *         name="user_id",
+     *         required=true,
+     *         @OA\Schema(
+     *             type="string"
+     *         )
+     *     ),
+     *     @OA\RequestBody(
+     *         required=true,
+     *         @OA\JsonContent(
+     *             @OA\Property(property="job_role", type="string", example="Encanador"),
+     *             @OA\Property(property="zipcode", type="string", example="99999999"),
+     *             @OA\Property(property="about", type="string", example="texto texto texto texto texto"),
+     *             @OA\Property(property="phone", type="string", example="51999999999")
+     *         )
+     *     ),
+     *     @OA\Response(
+     *         response="200",
+     *         description="successful operation",
+     *         @OA\JsonContent(
+     *             type="object",
+     *             properties={
+     *                 @OA\Property(property="message", type="string", example="Profile retrieved!"),
+     *                 @OA\Property(property="data", ref="#/components/schemas/UserProfile")
+     *             }
+     *
+     *         )
+     *     )
+     * )
+     */
+    public function show(int $user_id)
+    {
+        try {
+            $userProfile = $this->service->getProfileByUserId($user_id);
+
+            return response([
+                'message' => 'Profile retrieved!',
+                'data' => $userProfile,
+            ], 200);
+        } catch (Throwable $th) {
+            Log::error($th->getMessage(), []);
+
+            return response([
+                'message' => 'Server error!',
+            ], 500);
+        }
+    }
 }

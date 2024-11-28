@@ -28,4 +28,11 @@ class UserProfileRepository
         $userProfile->save();
         return $userProfile;
     }
+
+    public function getByUserId(int $user_id): UserProfile
+    {
+        return $this->model
+        ->where('user_id', '=', $user_id)
+        ->firstOrFail();
+    }
 }

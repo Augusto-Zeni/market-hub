@@ -12,8 +12,7 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('user_profile', function (Blueprint $table) {
-            $table->id();
-            $table->integer('user_id');
+            $table->integer('user_id')->primary();
             $table->string('job_role', 255);
             $table->string('zipcode', 8);
             $table->string('about');
@@ -21,7 +20,6 @@ return new class extends Migration
             $table->timestamps();
 
             $table->foreign('user_id')->references('id')->on('users');
-            $table->unique('user_id');
         });
     }
 

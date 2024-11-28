@@ -25,4 +25,9 @@ class UserProfileService
     {
         return $this->repository->update($data, $user_id);
     }
+
+    public function getProfileByUserId(int $user_id): UserProfile
+    {
+        return $this->repository->getByUserId($user_id);
+    }
 }

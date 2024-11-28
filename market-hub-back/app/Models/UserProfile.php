@@ -35,6 +35,8 @@ use Illuminate\Database\Eloquent\Model;
  */
 class UserProfile extends Model
 {
+    protected $primaryKey = 'user_id';
+    
     protected $table = 'user_profile';
     /**
      * The attributes that are mass assignable.
@@ -42,7 +44,6 @@ class UserProfile extends Model
      * @var array<int, string>
      */
     protected $fillable = [
-        'id',
         'user_id',
         'job_role',
         'zipcode',
