@@ -20,4 +20,9 @@ class ProfileSkillsService
     {
         return $this->repository->create($data);
     }
+
+    public function getProfileSkill(int $profile_id, int $skill_id): ?ProfileSkills
+    {
+        return $this->repository->getProfileSkill($profile_id, $skill_id);
+    }
 }

@@ -17,4 +17,11 @@ class ProfileSkillsRepository
     {
         return $this->model->create($data);
     }
+
+    public function getProfileSkill(int $profile_id, int $skill_id): ?ProfileSkills
+    {
+        return $this->model->where('profile_id', $profile_id)
+            ->where('id', $skill_id)
+            ->first();
+    }
 }

@@ -60,17 +60,79 @@ class ProfileSkillsController extends Controller
 
         try {
             $validated['profile_id'] = $profile_id;
-            $userProfile = $this->service->create($validated);
+            $skill = $this->service->create($validated);
 
             return response([
-                'message' => 'Profile created!',
-                'data' => $userProfile,
+                'message' => self::MESSAGE_SUCCESS,
+                'data' => $skill,
             ], 201);
         } catch (Throwable $th) {
             Log::error($th->getMessage(), []);
 
             return response([
                 'message' => 'Server error!',
+            ], 500);
+        }
+    }
+
+    /**
+     * @OA\Get(
+     *     tags={"Profile skill"},
+     *     path="/profile/{profile_id}/skills/{skill_id}",
+     *     description="Obtém uma habilidade do perfil",
+     *     tags={"ProfileSkills"},
+     *     @OA\Parameter(
+     *         description="Id do perfil",
+     *         in="path",
+     *         name="profile_id",
+     *         required=true,
+     *         @OA\Schema(
+     *             type="string"
+     *         )
+     *     ),
+     *     @OA\Parameter(
+     *         description="Id da habilidade",
+     *         in="path",
+     *         name="skill_id",
+     *         required=true,
+     *         @OA\Schema(
+     *             type="string"
+     *         )
+     *     ),
+     *     @OA\Response(
+     *         response="201",
+     *         description="successful operation",
+     *         @OA\JsonContent(
+     *             type="object",
+     *             properties={
+     *                 @OA\Property(property="message", type="string", example="Habilidade criada com sucesso"),
+     *                 @OA\Property(property="data", ref="#/components/schemas/ProfileSkill")
+     *             }
+     *
+     *         )
+     *     )
+     * )
+     */
+    public function show(int $profile_id, int $skill_id)
+    {
+        try {
+            $skill = $this->service->getProfileSkill($profile_id, $skill_id);
+
+            if (empty($skill)) {
+                return response([
+                    'message' => self::MESSAGE_NOT_FOUND,
+                ], 404);
+            }
+
+            return response([
+                'message' => self::MESSAGE_SUCCESS,
+                'data' => $skill,
+            ], 201);
+        } catch (Throwable $th) {
+            Log::error($th->getMessage(), []);
+
+            return response([
+                'message' => self::MESSAGE_SERVER_ERROR,
             ], 500);
         }
     }
