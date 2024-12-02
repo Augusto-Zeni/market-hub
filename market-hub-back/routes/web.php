@@ -34,6 +34,8 @@ Route::prefix('api')->group(function () {
     Route::get('/profile/{profile_id}', [UserProfileController::class, 'show']);
     
     Route::post('/profile/{profile_id}/skills', [ProfileSkillsController::class, 'create']);
+    Route::get('/profile/{profile_id}/skills', [ProfileSkillsController::class, 'showAll']);
     Route::get('/profile/{profile_id}/skills/{skill_id}', [ProfileSkillsController::class, 'show']);
     Route::patch('/profile/{profile_id}/skills/{skill_id}', [ProfileSkillsController::class, 'update']);
+    Route::delete('/profile/{profile_id}/skills/{skill_id}', [ProfileSkillsController::class, 'delete']);
 });
