@@ -75,7 +75,7 @@ class UserProfileController extends Controller
     }
 
     /**
-     * @OA\Put(
+     * @OA\Patch(
      *     tags={"User profile"},
      *     path="/profile/{profile_id}",
      *     description="Edita perfil do usuário",

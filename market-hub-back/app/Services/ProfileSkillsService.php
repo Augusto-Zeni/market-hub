@@ -25,4 +25,9 @@ class ProfileSkillsService
     {
         return $this->repository->getProfileSkill($profile_id, $skill_id);
     }
+
+    public function update(int $profile_id, int $skill_id, array $data): ?ProfileSkills
+    {
+        return $this->repository->update($profile_id, $skill_id, $data);
+    }
 }

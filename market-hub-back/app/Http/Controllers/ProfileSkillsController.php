@@ -136,4 +136,65 @@ class ProfileSkillsController extends Controller
             ], 500);
         }
     }
+
+
+    /**
+     * @OA\Patch(
+     *     tags={"Profile skill"},
+     *     path="/profile/{profile_id}/skills/{skill_id}",
+     *     description="Edita uma habilidade do perfil",
+     *     tags={"ProfileSkills"},
+     *     @OA\Parameter(
+     *         description="Id do perfil",
+     *         in="path",
+     *         name="profile_id",
+     *         required=true,
+     *         @OA\Schema(
+     *             type="string"
+     *         )
+     *     ),
+     *     @OA\Parameter(
+     *         description="Id da habilidade",
+     *         in="path",
+     *         name="skill_id",
+     *         required=true,
+     *         @OA\Schema(
+     *             type="string"
+     *         )
+     *     ),
+     *     @OA\Response(
+     *         response="201",
+     *         description="successful operation",
+     *         @OA\JsonContent(
+     *             type="object",
+     *             properties={
+     *                 @OA\Property(property="message", type="string", example="Habilidade criada com sucesso"),
+     *                 @OA\Property(property="data", ref="#/components/schemas/ProfileSkill")
+     *             }
+     *
+     *         )
+     *     )
+     * )
+     */
+    public function update(int $profile_id, int $skill_id, Request $request)
+    {
+        $validated = $request->validate([
+            'skill' => 'required',
+        ]);
+
+        try {
+            $skill = $this->service->update($profile_id, $skill_id, $validated);
+
+            return response([
+                'message' => self::MESSAGE_SUCCESS,
+                'data' => $skill,
+            ], 200);
+        } catch (Throwable $th) {
+            Log::error($th->getMessage(), []);
+
+            return response([
+                'message' => 'Server error!',
+            ], 500);
+        }
+    }
 }

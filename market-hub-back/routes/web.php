@@ -30,10 +30,10 @@ Route::prefix('api')->group(function () {
     
 
     Route::post('/profile', [UserProfileController::class, 'create']);
-    Route::put('/profile/{profile_id}', [UserProfileController::class, 'update']);
+    Route::patch('/profile/{profile_id}', [UserProfileController::class, 'update']);
     Route::get('/profile/{profile_id}', [UserProfileController::class, 'show']);
     
     Route::post('/profile/{profile_id}/skills', [ProfileSkillsController::class, 'create']);
     Route::get('/profile/{profile_id}/skills/{skill_id}', [ProfileSkillsController::class, 'show']);
-    Route::put('/profile/{profile_id}/skills/{skill_id}', [ProfileSkillsController::class, 'update']);
+    Route::patch('/profile/{profile_id}/skills/{skill_id}', [ProfileSkillsController::class, 'update']);
 });
