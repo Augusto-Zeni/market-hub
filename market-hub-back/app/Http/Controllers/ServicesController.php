@@ -6,6 +6,7 @@ namespace App\Http\Controllers;
 
 use App\Services\ServicesService;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
 use Throwable;
 
 class ServicesController extends Controller
@@ -118,6 +119,52 @@ class ServicesController extends Controller
         }
     }
 
+
+    /**
+     * @OA\Get(
+     *     tags={"Services"},
+     *     path="/user/{user_id}/services",
+     *     description="Obtém serviços de um usuário",
+     *     tags={"Services"},
+     *     @OA\Parameter(
+     *         description="Id do usuário",
+     *         in="path",
+     *         name="user_id",
+     *         required=true,
+     *         @OA\Schema(
+     *             type="string"
+     *         )
+     *     ),
+     *     @OA\Response(
+     *         response="200",
+     *         description="successful operation",
+     *         @OA\JsonContent(
+     *             type="object",
+     *             properties={
+     *                 @OA\Property(property="message", type="string", example="Habilidade criada com sucesso"),
+     *                 @OA\Property(property="data", type="array", @OA\Items(ref="#/components/schemas/Service"))
+     *             }
+     *         )
+     *     )
+     * )
+     */
+    public function index(int $user_id)
+    {
+        try {
+            $services = $this->service->servicesByUser($user_id);
+
+            return response([
+                'message' => self::MESSAGE_SUCCESS,
+                'data' => $services,
+            ]);
+        } catch (Throwable $th) {
+            Log::error($th->getMessage());
+            return response([
+                'message' => self::MESSAGE_SERVER_ERROR,
+            ], 500);
+        }
+    }
+
     /**
      * @OA\Patch(
      *     tags={"Services"},
@@ -180,7 +227,7 @@ class ServicesController extends Controller
     /**
      * @OA\Delete(
      *     tags={"Services"},
-     *     path="/servoces/{service_id}",
+     *     path="/services/{service_id}",
      *     description="deleta uma serviço",
      *     tags={"Services"},
      *     @OA\Parameter(

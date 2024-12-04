@@ -5,12 +5,19 @@ declare(strict_types=1);
 namespace App\Repositories;
 
 use App\Models\Service;
+use Illuminate\Database\Eloquent\Collection;
 
 class ServicesRepository
 {
     public function __construct(
         private Service $model
     ) {
+    }
+
+    public function servicesByUser(int $user_id): Collection
+    {
+        return $this->model->where('user_id', $user_id)
+            ->get();
     }
 
     public function create(array $data): Service

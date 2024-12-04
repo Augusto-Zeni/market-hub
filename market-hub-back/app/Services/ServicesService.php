@@ -6,12 +6,18 @@ namespace App\Services;
 
 use App\Models\Service;
 use App\Repositories\ServicesRepository;
+use Illuminate\Database\Eloquent\Collection;
 
 class ServicesService
 {
     public function __construct(
         private ServicesRepository $repository
     ) {
+    }
+
+    public function servicesByUser(int $user_id): Collection
+    {
+        return $this->repository->servicesByUser($user_id);
     }
 
     public function create(array $data): Service

@@ -42,6 +42,7 @@ Route::prefix('api')->group(function () {
 
     Route::post('/services', [ServicesController::class, 'create']);
     Route::get('/services/{service_id}', [ServicesController::class, 'show']);
+    Route::get('/user/{user_id}/services', [ServicesController::class, 'index']);
     Route::patch('/services/{service_id}', [ServicesController::class, 'update']);
     Route::delete('/services/{service_id}', [ServicesController::class, 'delete']);
 });
