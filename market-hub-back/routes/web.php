@@ -5,6 +5,7 @@ declare(strict_types=1);
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\DocumentationController;
+use App\Http\Controllers\FeedController;
 use App\Http\Controllers\ProfileSkillsController;
 use App\Http\Controllers\ServicesController;
 use App\Http\Controllers\UserProfileController;
@@ -45,4 +46,6 @@ Route::prefix('api')->group(function () {
     Route::get('/user/{user_id}/services', [ServicesController::class, 'index']);
     Route::patch('/services/{service_id}', [ServicesController::class, 'update']);
     Route::delete('/services/{service_id}', [ServicesController::class, 'delete']);
+
+    Route::get('/feed', [FeedController::class, 'index']);
 });
