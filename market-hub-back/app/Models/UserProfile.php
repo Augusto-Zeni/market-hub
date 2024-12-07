@@ -19,23 +19,28 @@ use Illuminate\Database\Eloquent\Model;
  *         property="job_role",
  *         type="string"
  *     ),
- *      @OA\Property(
+ *     @OA\Property(
  *         property="zipcode",
  *         type="string"
  *     ),
- *      @OA\Property(
+ *     @OA\Property(
+ *         property="location",
+ *         type="string"
+ *     ),
+ *     @OA\Property(
  *         property="about",
  *         type="string"
  *     ),
- *      @OA\Property(
+ *     @OA\Property(
  *         property="phone",
  *         type="string"
  *     )
  * )
  */
 class UserProfile extends Model
-{    
+{
     protected $table = 'user_profile';
+
     /**
      * The attributes that are mass assignable.
      *
@@ -46,6 +51,7 @@ class UserProfile extends Model
         'user_id',
         'job_role',
         'zipcode',
+        'location',
         'about',
         'phone',
     ];

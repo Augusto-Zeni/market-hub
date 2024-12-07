@@ -6,23 +6,40 @@ namespace App\Services;
 
 use App\Models\UserProfile;
 use App\Repositories\UserProfileRepository;
+use App\Repositories\ViacepRepository;
+use Exception;
 
 class UserProfileService
 {
     public function __construct(
-        private UserProfileRepository $repository
-    )
-    {
-        
+        private UserProfileRepository $repository,
+        private ViacepRepository $viacep
+    ) {
     }
 
     public function createUserProfile(array $data): UserProfile
     {
+        $location = $this->viacep->getLocation($data['zipcode']);
+
+        if (empty($location)) {
+            throw new Exception('asodkjsaodsad');
+        }
+
+        $data['location'] = $location;
+
         return $this->repository->create($data);
     }
 
     public function updateUserProfile(array $data, int $profile_id): UserProfile
     {
+        $location = $this->viacep->getLocation($data['zipcode']);
+
+        if (empty($location)) {
+            throw new Exception('asodkjsaodsad');
+        }
+
+        $data['location'] = $location;
+
         return $this->repository->update($data, $profile_id);
     }
 

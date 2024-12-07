@@ -16,10 +16,10 @@ return new class extends Migration
             $table->integer('user_id');
             $table->string('job_role', 255);
             $table->string('zipcode', 8);
+            $table->string('location', 255);
             $table->string('about');
             $table->string('phone', 11);
             $table->timestamps();
-
             $table->foreign('user_id')->references('id')->on('users');
             $table->unique('user_id');
         });
