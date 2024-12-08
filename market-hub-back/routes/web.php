@@ -46,6 +46,7 @@ Route::prefix('api')->group(function () {
         Route::get('/user/{user_id}/services', [ServicesController::class, 'index']);
         Route::patch('/services/{service_id}', [ServicesController::class, 'update']);
         Route::delete('/services/{service_id}', [ServicesController::class, 'delete']);
+        Route::post('/services/{service_id}/upload-image', [ServicesController::class, 'uploadImage']);
     
         Route::get('/feed', [FeedController::class, 'index']);
 

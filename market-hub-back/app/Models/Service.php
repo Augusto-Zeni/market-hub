@@ -23,13 +23,17 @@ use Illuminate\Database\Eloquent\Model;
  *         property="description",
  *         type="string"
  *     ),
- *   	   @OA\Property(
+ *     @OA\Property(
  *         property="price_per_hour",
  *         type="int"
  *     ),
- *  	   @OA\Property(
+ *     @OA\Property(
  *         property="average_time_duration",
  *         type="int"
+ *     ),
+ *     @OA\Property(
+ *         property="image_url",
+ *         type="string"
  *     ),
  * )
  */
@@ -48,5 +52,6 @@ class Service extends Model
         'description',
         'price_per_hour',
         'average_time_duration',
+        'image_url',
     ];
 }

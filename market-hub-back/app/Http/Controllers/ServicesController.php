@@ -4,9 +4,11 @@ declare(strict_types=1);
 
 namespace App\Http\Controllers;
 
+use App\Models\Service;
 use App\Services\ServicesService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Storage;
 use Throwable;
 
 class ServicesController extends Controller
@@ -118,7 +120,6 @@ class ServicesController extends Controller
             ], 500);
         }
     }
-
 
     /**
      * @OA\Get(
@@ -261,6 +262,72 @@ class ServicesController extends Controller
                 'message' => self::MESSAGE_SUCCESS,
                 'data' => $service,
             ], 204);
+        } catch (Throwable $th) {
+            return response([
+                'message' => self::MESSAGE_SERVER_ERROR,
+            ], 500);
+        }
+    }
+
+    /**
+     * @OA\Post(
+     *     tags={"Services"},
+     *     path="/services/{service_id}/upload-image",
+     *     description="Cria um anúncio de serviço",
+     *     tags={"Services"},
+     *     @OA\Parameter(
+     *         description="Id do serviço",
+     *         in="path",
+     *         name="service_id",
+     *         required=true,
+     *         @OA\Schema(
+     *             type="string"
+     *         )
+     *     ),
+     *     @OA\RequestBody(
+     *         required=true,
+     *         @OA\MediaType(
+     *             mediaType="multipart/form-data",
+     *             @OA\Schema(
+     *                 @OA\Property(
+     *                     description="file",
+     *                     property="image",
+     *                     type="string",
+     *                     format="file",
+     *                 ),
+     *                 required={"image"}
+     *             )
+     *         )
+     *     ),
+     *     @OA\Response(
+     *         response="201",
+     *         description="successful operation",
+     *         @OA\JsonContent(
+     *             type="object",
+     *             properties={
+     *                 @OA\Property(property="message", type="string", example="Habilidade criada com sucesso"),
+     *                 @OA\Property(property="data", ref="#/components/schemas/Service")
+     *             }
+     *
+     *         )
+     *     )
+     * )
+     */
+    public function uploadImage(int $profile_id, Request $request)
+    {
+        try {
+            $imagem = $request->file('image');
+
+            $file = $imagem->store();
+
+            $service = Service::findOrFail($profile_id);
+            $service->image_url = Storage::url($file);
+            $service->save();
+
+            return response([
+                'message' => self::MESSAGE_SUCCESS,
+                'data' => $service,
+            ], 200);
         } catch (Throwable $th) {
             return response([
                 'message' => self::MESSAGE_SERVER_ERROR,

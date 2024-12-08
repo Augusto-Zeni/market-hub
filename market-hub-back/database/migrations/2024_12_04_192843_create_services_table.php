@@ -18,6 +18,7 @@ return new class extends Migration
             $table->text('description');
             $table->integer('price_per_hour');
             $table->integer('average_time_duration');
+            $table->string('image_url');
             $table->foreign('user_id')->references('id')->on('users');
         });
     }
