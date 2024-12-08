@@ -55,9 +55,12 @@ use Illuminate\Database\Eloquent\Model;
  *         property="count_5_stars",
  *         type="int"
  *     ),
+ *     @OA\Property(
+ *         property="average_stars",
+ *         type="double",
+ *     ),
  * )
  */
-
 class Review extends Model
 {
     protected $table = 'reviews';
