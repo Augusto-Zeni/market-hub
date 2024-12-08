@@ -23,4 +23,9 @@ class ReviewsService
     {
         return $this->repository->profileStars($profile_id);
     }
+
+    public function profileReviews(int $profile_id): array
+    {
+        return $this->repository->profileReviews($profile_id);
+    }
 }

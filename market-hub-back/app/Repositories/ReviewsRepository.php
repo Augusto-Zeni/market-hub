@@ -38,4 +38,12 @@ class ReviewsRepository
 
         return (array) $stars;
     }
+
+    public function profileReviews($profile_id): array
+    {
+        return DB::table('reviews')
+            ->where('profile_id', $profile_id)
+            ->get()
+            ->all();
+    }
 }

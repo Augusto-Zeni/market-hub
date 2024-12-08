@@ -55,5 +55,6 @@ Route::prefix('api')->group(function () {
 
         Route::post('/reviews', [ReviewsController::class, 'create']);
         Route::get('/reviews/profile-stars/{profile_id}', [ReviewsController::class, 'profileStars']);
+        Route::get('/reviews/profile-reviews/{profile_id}', [ReviewsController::class, 'profileReviews']);
     });
 });

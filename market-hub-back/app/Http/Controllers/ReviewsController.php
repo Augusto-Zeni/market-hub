@@ -117,4 +117,51 @@ class ReviewsController extends Controller
             ], 500);
         }
     }
+
+
+    /**
+     * @OA\Get(
+     *     tags={"Reviews"},
+     *     path="/reviews/profile-reviews/{profile_id}",
+     *     description="Obtém reviews no perfil do prestador",
+     *     tags={"Reviews"},
+     *     @OA\Parameter(
+     *         description="Id do perfil",
+     *         in="path",
+     *         name="profile_id",
+     *         required=true,
+     *         @OA\Schema(
+     *             type="int"
+     *         )
+     *     ),
+     *     @OA\Response(
+     *         response="200",
+     *         description="successful operation",
+     *         @OA\JsonContent(
+     *             type="object",
+     *             properties={
+     *                 @OA\Property(property="message", type="string", example="Habilidade criada com sucesso"),
+     *                 @OA\Property(property="data", type="array", @OA\Items(ref="#/components/schemas/Review"))
+     *             }
+     *
+     *         )
+     *     )
+     * )
+     */
+    public function profileReviews(int $profile_id)
+    {
+        try {
+            $service = $this->service->profileReviews($profile_id);
+
+            return response([
+                'message' => self::MESSAGE_SUCCESS,
+                'data' => $service,
+            ]);
+        } catch (Throwable $th) {
+            Log::error($th->getMessage());
+            return response([
+                'message' => self::MESSAGE_SERVER_ERROR,
+            ], 500);
+        }
+    }
 }
