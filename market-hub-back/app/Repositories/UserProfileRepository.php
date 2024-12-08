@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Repositories;
 
 use App\Models\UserProfile;
+use stdClass;
 
 class UserProfileRepository
 {
@@ -29,5 +30,10 @@ class UserProfileRepository
     public function find(int $profile_id): UserProfile
     {
         return $this->model->findOrFail($profile_id);
+    }
+
+    public function findByUserId(int $user_id): UserProfile
+    {
+        return $this->model->where('user_id', $user_id)->get()->first();
     }
 }

@@ -174,7 +174,7 @@ class UserProfileController extends Controller
     public function show(int $user_id)
     {
         try {
-            $userProfile = $this->service->getProfileByUserId($user_id);
+            $userProfile = $this->service->getProfile($user_id);
 
             return response([
                 'message' => 'Profile retrieved!',

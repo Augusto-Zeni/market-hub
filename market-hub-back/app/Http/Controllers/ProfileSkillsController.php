@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Http\Controllers;
 
 use App\Services\ProfileSkillsService;
+use Illuminate\Auth\Middleware\Authorize;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
 use Throwable;

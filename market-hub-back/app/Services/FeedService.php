@@ -5,11 +5,15 @@ declare(strict_types=1);
 namespace App\Services;
 
 use App\Models\Service;
-use Illuminate\Database\Eloquent\Collection;
-use Illuminate\Pagination\Paginator;
 
 class FeedService
 {
+    public function __construct(
+        private UserProfileService $userProfileService,
+        private ReviewsService $reviewsService
+    ) {
+    }
+
     public function search(array $filters)
     {
         $query = Service::query();
@@ -28,11 +32,25 @@ class FeedService
             $query->where('description', 'ilike', '%' . $filters['search'] . '%');
         }
 
+        if (isset($filters['category'])) {
+            $query->where('category', '=', $filters['category']);
+        }
+
+
         $result = $query->paginate(
             perPage: $per_page,
             page: $page
         );
 
-       $result = $result->toArray();
+        $result = $result->toArray();
+
+        foreach ($result['data'] as $key => $item) {
+            $profile = $this->userProfileService->getProfileByUserId($item['user_id']);
+            $reviews = $this->reviewsService->profileStars($profile->id);
+
+            $result['data'][$key]['profile'] = $profile->toArray();
+            $result['data'][$key]['stars'] = $reviews;
+        }
+        return $result;
     }
 }

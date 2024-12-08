@@ -8,6 +8,7 @@ use App\Models\UserProfile;
 use App\Repositories\UserProfileRepository;
 use App\Repositories\ViacepRepository;
 use Exception;
+use stdClass;
 
 class UserProfileService
 {
@@ -43,8 +44,13 @@ class UserProfileService
         return $this->repository->update($data, $profile_id);
     }
 
-    public function getProfileByUserId(int $profile_id): UserProfile
+    public function getProfile(int $profile_id): UserProfile
     {
         return $this->repository->find($profile_id);
+    }
+
+    public function getProfileByUserId(int $user_id): UserProfile
+    {
+        return $this->repository->findByUserId($user_id);
     }
 }

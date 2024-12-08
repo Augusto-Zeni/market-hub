@@ -39,6 +39,46 @@ use Illuminate\Database\Eloquent\Model;
  *         property="category",
  *         type="string"
  *     ),
+ * ),
+ * @OA\Schema(
+ *     schema="FeedResponse",
+ *     title="Feed",
+ * 	   @OA\Property(
+ *         property="id",
+ *         type="int"
+ *     ),
+ * 	   @OA\Property(
+ *         property="user_id",
+ *         type="int"
+ *     ),
+ *     @OA\Property(
+ *         property="description",
+ *         type="string"
+ *     ),
+ *     @OA\Property(
+ *         property="price_per_hour",
+ *         type="int"
+ *     ),
+ *     @OA\Property(
+ *         property="average_time_duration",
+ *         type="int"
+ *     ),
+ *     @OA\Property(
+ *         property="image_url",
+ *         type="string"
+ *     ),
+ *     @OA\Property(
+ *         property="category",
+ *         type="string"
+ *     ),
+ *     @OA\Property(
+ *         property="profile",
+ *         ref="#/components/schemas/UserProfile"
+ *     ),
+ *     @OA\Property(
+ *         property="stars",
+ *         ref="#/components/schemas/Stars"
+ *     ),
  * )
  */
 class Service extends Model

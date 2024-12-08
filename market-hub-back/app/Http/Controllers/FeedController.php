@@ -4,8 +4,10 @@ declare(strict_types=1);
 
 namespace App\Http\Controllers;
 
+use App\Enum\CategoryEnum;
 use App\Services\FeedService;
 use Illuminate\Http\Request;
+use Illuminate\Validation\Rule;
 use Throwable;
 
 class FeedController extends Controller
@@ -16,7 +18,6 @@ class FeedController extends Controller
     }
 
     /**
-     *
      * @OA\Get(
      *     path="/feed",
      *     tags={"Feed"},
@@ -48,11 +49,7 @@ class FeedController extends Controller
      *         description="Lista de posts paginada",
      *         @OA\JsonContent(
      *             @OA\Property(property="current_page", type="integer", example=1),
-     *             @OA\Property(property="data", type="array", @OA\Items(
-     *                 @OA\Property(property="id", type="integer", example=1),
-     *                 @OA\Property(property="title", type="string", example="Post 1"),
-     *                 @OA\Property(property="content", type="string", example="Lorem ipsum...")
-     *             )),
+     *            @OA\Property(property="data", type="array", @OA\Items(ref="#/components/schemas/FeedResponse")),
      *             @OA\Property(property="total", type="integer", example=50),
      *             @OA\Property(property="last_page", type="integer", example=5),
      *             @OA\Property(property="per_page", type="integer", example=10),
@@ -75,6 +72,7 @@ class FeedController extends Controller
             'search' => 'string',
             'page' => 'integer',
             'per_page' => 'integer',
+            'category' => [Rule::enum(CategoryEnum::class)],
         ]);
 
         try {
@@ -82,6 +80,7 @@ class FeedController extends Controller
 
             return response($results);
         } catch (Throwable $th) {
+            dd($th);
             return response([
                 'message' => self::MESSAGE_SERVER_ERROR,
             ], 500);
