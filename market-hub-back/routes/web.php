@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\RegisterController;
+use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\DocumentationController;
 use App\Http\Controllers\FeedController;
 use App\Http\Controllers\ProfileSkillsController;
@@ -43,6 +44,7 @@ Route::prefix('api')->group(function () {
         Route::delete('/profile/{profile_id}/skills/{skill_id}', [ProfileSkillsController::class, 'delete']);
     
         Route::post('/services', [ServicesController::class, 'create']);
+        Route::get('/services/categories', [CategoryController::class, 'index']);
         Route::get('/services/{service_id}', [ServicesController::class, 'show']);
         Route::get('/user/{user_id}/services', [ServicesController::class, 'index']);
         Route::patch('/services/{service_id}', [ServicesController::class, 'update']);

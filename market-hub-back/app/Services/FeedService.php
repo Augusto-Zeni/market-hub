@@ -28,9 +28,11 @@ class FeedService
             $query->where('description', 'ilike', '%' . $filters['search'] . '%');
         }
 
-        return $query->paginate(
+        $result = $query->paginate(
             perPage: $per_page,
             page: $page
         );
+
+       $result = $result->toArray();
     }
 }

@@ -4,11 +4,13 @@ declare(strict_types=1);
 
 namespace App\Http\Controllers;
 
+use App\Enum\CategoryEnum;
 use App\Models\Service;
 use App\Services\ServicesService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Validation\Rule;
 use Throwable;
 
 class ServicesController extends Controller
@@ -27,9 +29,10 @@ class ServicesController extends Controller
      *     @OA\RequestBody(
      *         required=true,
      *         @OA\JsonContent(
-     *             required={"user_id", "description", "price_per_hour", "average_time_duration"},
+     *             required={"user_id", "description", "price_per_hour", "average_time_duration", "category"},
      *             @OA\Property(property="user_id", type="int", example="1"),
      *             @OA\Property(property="description", type="string", example="Conserto de encanamentos"),
+     *             @OA\Property(property="category", type="string", example="PEDREIRO"),
      *             @OA\Property(property="price_per_hour", type="int", example="10"),
      *             @OA\Property(property="average_time_duration", type="int", example="1"),
      *         )
@@ -55,6 +58,10 @@ class ServicesController extends Controller
             'description' => 'required|string',
             'price_per_hour' => 'required|integer',
             'average_time_duration' => 'required|integer',
+            'category' => [
+                'required',
+                Rule::enum(CategoryEnum::class),
+            ],
         ]);
 
         try {
@@ -65,6 +72,7 @@ class ServicesController extends Controller
                 'data' => $service,
             ], 201);
         } catch (Throwable $th) {
+            dd($th);
             return response([
                 'message' => self::MESSAGE_SERVER_ERROR,
             ], 500);
@@ -187,6 +195,7 @@ class ServicesController extends Controller
      *             @OA\Property(property="description", type="string", example="Conserto de encanamentos"),
      *             @OA\Property(property="price_per_hour", type="int", example="10"),
      *             @OA\Property(property="average_time_duration", type="int", example="1"),
+     *             @OA\Property(property="category", type="string", example="PEDREIRO"),
      *         )
      *     ),
      *     @OA\Response(
@@ -209,6 +218,10 @@ class ServicesController extends Controller
             'description' => 'sometimes|string',
             'price_per_hour' => 'sometimes|integer',
             'average_time_duration' => 'sometimes|integer',
+            'category' => [
+                'sometimes',
+                Rule::enum(CategoryEnum::class),
+            ]
         ]);
 
         try {
