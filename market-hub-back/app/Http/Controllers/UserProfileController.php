@@ -4,10 +4,12 @@ declare(strict_types=1);
 
 namespace App\Http\Controllers;
 
+use App\Models\UserProfile;
 use App\Services\UserProfileService;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Storage;
 use Throwable;
 
 class UserProfileController extends Controller
@@ -183,6 +185,73 @@ class UserProfileController extends Controller
 
             return response([
                 'message' => 'Server error!',
+            ], 500);
+        }
+    }
+
+
+     /**
+     * @OA\Post(
+     *     tags={"UserProfile"},
+     *     path="/services/{profile_id}/upload-image",
+     *     description="upload de imagem do perfil",
+     *     tags={"UserProfile"},
+     *     @OA\Parameter(
+     *         description="Id do perfil",
+     *         in="path",
+     *         name="profile_id",
+     *         required=true,
+     *         @OA\Schema(
+     *             type="string"
+     *         )
+     *     ),
+     *     @OA\RequestBody(
+     *         required=true,
+     *         @OA\MediaType(
+     *             mediaType="multipart/form-data",
+     *             @OA\Schema(
+     *                 @OA\Property(
+     *                     description="file",
+     *                     property="image",
+     *                     type="string",
+     *                     format="file",
+     *                 ),
+     *                 required={"image"}
+     *             )
+     *         )
+     *     ),
+     *     @OA\Response(
+     *         response="201",
+     *         description="successful operation",
+     *         @OA\JsonContent(
+     *             type="object",
+     *             properties={
+     *                 @OA\Property(property="message", type="string", example="Habilidade criada com sucesso"),
+     *                 @OA\Property(property="data", ref="#/components/schemas/UserProfile")
+     *             }
+     *
+     *         )
+     *     )
+     * )
+     */
+    public function uploadImage(int $profile_id, Request $request)
+    {
+        try {
+            $imagem = $request->file('image');
+
+            $file = $imagem->store();
+
+            $service = UserProfile::findOrFail($profile_id);
+            $service->image_url = Storage::url($file);
+            $service->save();
+
+            return response([
+                'message' => self::MESSAGE_SUCCESS,
+                'data' => $service,
+            ], 200);
+        } catch (Throwable $th) {
+            return response([
+                'message' => self::MESSAGE_SERVER_ERROR,
             ], 500);
         }
     }

@@ -34,6 +34,10 @@ use Illuminate\Database\Eloquent\Model;
  *     @OA\Property(
  *         property="phone",
  *         type="string"
+ *     ),
+ *     @OA\Property(
+ *         property="image_url",
+ *         type="string"
  *     )
  * )
  */
@@ -54,5 +58,6 @@ class UserProfile extends Model
         'location',
         'about',
         'phone',
+        'image_url'
     ];
 }

@@ -19,6 +19,7 @@ return new class extends Migration
             $table->string('location', 255);
             $table->string('about');
             $table->string('phone', 11);
+            $table->string('image_url');
             $table->timestamps();
             $table->foreign('user_id')->references('id')->on('users');
             $table->unique('user_id');

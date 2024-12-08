@@ -34,6 +34,7 @@ Route::prefix('api')->group(function () {
         Route::post('/profile', [UserProfileController::class, 'create']);
         Route::patch('/profile/{profile_id}', [UserProfileController::class, 'update']);
         Route::get('/profile/{profile_id}', [UserProfileController::class, 'show']);
+        Route::post('/profile/{profile_id}/upload-image', [UserProfileController::class, 'uploadImage']);
         
         Route::post('/profile/{profile_id}/skills', [ProfileSkillsController::class, 'create']);
         Route::get('/profile/{profile_id}/skills', [ProfileSkillsController::class, 'showAll']);
