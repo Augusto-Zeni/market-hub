@@ -1,4 +1,5 @@
 import isNil from 'lodash/isNil'
+import InputMask from 'react-input-mask'
 import styled from 'styled-components'
 
 export const Container = styled.div`
@@ -23,7 +24,7 @@ export const Container = styled.div`
   }
 `
 
-export const InputBox = styled.input`
+export const InputMaskStyled = styled(InputMask)`
   border: none;
   outline: none;
   padding-left: 5px;
@@ -34,4 +35,4 @@ export const InputBox = styled.input`
   &:focus {
     color: #3b3b3b;
   }
-`
+` 

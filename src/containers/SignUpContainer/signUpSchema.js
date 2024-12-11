@@ -26,7 +26,14 @@ export const signupValidationSchema = Yup.object().shape({
     .min(2, 'Estado deve ter 2 caracteres')
     .max(2, 'Estado deve ter 2 caracteres'),
   cellphone: Yup.string()
-      .required('Telefone é obrigatório')
-      .test('isValidTelefone', 'Telefone inválido', telefoneValidator)
-      .min(14, 'Máximo 10 caracteres'),
+    .required('Telefone é obrigatório')
+    .test('isValidTelefone', 'Telefone inválido', telefoneValidator)
+    .min(14, 'Máximo 10 caracteres'),
+  zipcode: Yup.string()
+    .required('CEP é obrigatório')
+    .min(9, 'CEP deve ter 8 caracteres')
+    .max(9, 'CEP deve ter 8 caracteres'),
+  job: Yup.string()
+    .required('Profissão é obrigatório')
+    .min(2, 'Profissão deve ter no mínimo 2 caracteres'),
 })

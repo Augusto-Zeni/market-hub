@@ -1,6 +1,9 @@
+import { createProfile } from '@/api/create-profile'
 import { signUp } from '@/api/sign-up'
 import Button from '@/components/Button/Button'
 import Input from '@/components/Input/Input'
+import { InputCep } from '@/components/InputCep/InputCep'
+import { InputPhone } from '@/components/InputPhone/InputPhone'
 import { Textarea } from '@/components/Textarea/Textarea'
 import { useAuth } from '@/contexts/AuthContext'
 import { Checkbox } from '@mui/material'
@@ -31,11 +34,22 @@ export function SignUpContainer() {
       })
 
       setUserData(response)
-      setSubmitting(false)
 
-      toast.success('Conta criada com sucesso.')
+      setTimeout(async () => {
+        await createProfile({
+          userId: response.id,
+          about: values.about,
+          jobRole: values.job,
+          zipCode: values.zipcode.replace(/\D/g, ''),
+          phone: values.cellphone?.replace(/\D/g, ''),
+        })
 
-      navigate('/')
+        setSubmitting(false)
+
+        toast.success('Conta criada com sucesso.')
+
+        navigate('/')
+      }, [500])
     } catch {
       toast.error('Ops! Algo de errado aconteceu, tente novamente.')
     }
@@ -92,7 +106,7 @@ export function SignUpContainer() {
                       )}
                       
                       <Field
-                        as={Input}
+                        as={InputPhone}
                         name="cellphone"
                         id="cellphone-cadastrar"
                         type="text"
@@ -102,7 +116,6 @@ export function SignUpContainer() {
                         shadowColor="#44bb0142"
                         style={{ margin: errors.cellphone && touched.cellphone ? '.3rem 0' : '1rem 0', height: 40, padding: 5 }}   
                         borderRadius={15}
-                        mask
                       />
                       {errors.cellphone && touched.cellphone && (
                         <ContainerError>
@@ -165,6 +178,25 @@ export function SignUpContainer() {
                       )}
 
                       <Field
+                        as={InputCep}
+                        name="zipcode"
+                        id="zipcode-cadastrar"
+                        type="text"
+                        placeholder="CEP"
+                        borderColor="#44BB01"
+                        borderColorHover="#44BB01"
+                        shadowColor="#44bb0142"
+                        style={{ margin: errors.zipcode && touched.zipcode ? '.3rem 0' : '1rem 0', height: 40, padding: 5 }}   
+                        borderRadius={15}
+                        maxlength="9"
+                      />
+                      {errors.zipcode && touched.zipcode && (
+                        <ContainerError>
+                          <ErrorMsg>{errors.zipcode}</ErrorMsg>
+                        </ContainerError>
+                      )}
+
+                      <Field
                         as={Textarea}
                         name="about"
                         id="about-cadastrar"
@@ -180,6 +212,24 @@ export function SignUpContainer() {
                       {errors.about && touched.about && (
                         <ContainerError>
                           <ErrorMsg>{errors.about}</ErrorMsg>
+                        </ContainerError>
+                      )}
+
+                      <Field
+                        as={Input}
+                        name="job"
+                        id="job-cadastrar"
+                        type="text"
+                        placeholder="Profissão"
+                        borderColor="#44BB01"
+                        borderColorHover="#44BB01"
+                        shadowColor="#44bb0142"
+                        style={{ margin: errors.job && touched.job ? '.3rem 0' : '1rem 0', height: 40, padding: 5 }}   
+                        borderRadius={15}
+                      />
+                      {errors.job && touched.job && (
+                        <ContainerError>
+                          <ErrorMsg>{errors.job}</ErrorMsg>
                         </ContainerError>
                       )}
 

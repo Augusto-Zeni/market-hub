@@ -16,6 +16,7 @@ import {
   StyledMapPin,
   StyledStar,
   Title,
+  WhitoutImage,
 } from './styles/ServiceCard.style'
 
 const HotelCard = ({ cardInfos, hasBoxShadow = true }) => {
@@ -23,10 +24,14 @@ const HotelCard = ({ cardInfos, hasBoxShadow = true }) => {
     <CardWrapper>
       <CardContainer $hasBoxShadow={hasBoxShadow}>
         <ImageContainer>
-          <Image src={cardInfos.img} alt="service-image" />
+          {cardInfos.img ? (
+            <Image src={cardInfos.img} alt="service-image" />
+          ) : (
+            <WhitoutImage />
+          )}
           <RatingBadge>
             <StyledStar />
-            <RatingText>{cardInfos.raiting}</RatingText>
+            <RatingText>{cardInfos.raiting === 0 ? '-' : cardInfos.raiting}</RatingText>
           </RatingBadge>
         </ImageContainer>
 
@@ -38,7 +43,12 @@ const HotelCard = ({ cardInfos, hasBoxShadow = true }) => {
                 <StyledMapPin />
                 <span>{cardInfos.location}</span>
               </Location>
-              <Price>{cardInfos.price}</Price>
+              <Price>
+                {cardInfos.price.toLocaleString('pt-BR', {
+                    style: 'currency',
+                    currency: 'BRL',
+                })} / h
+              </Price>
             </InfoContainer>
 
             <ActionButton>

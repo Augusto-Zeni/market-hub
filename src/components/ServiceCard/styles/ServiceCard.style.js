@@ -34,6 +34,14 @@ export const Image = styled.img`
   border-radius: 32px;
 `
 
+export const WhitoutImage = styled.img`
+  width: 100%;
+  height: 80%;
+  object-fit: cover;
+  border-radius: 32px;
+  background: #003913;
+`
+
 export const RatingBadge = styled.div`
   position: absolute;
   top: 1rem;
