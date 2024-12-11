@@ -1,5 +1,6 @@
-import styled from 'styled-components'
 import isNil from 'lodash/isNil'
+import { NavLink } from 'react-router-dom'
+import styled from 'styled-components'
 
 export const HeaderContainer = styled.header`
   background-color: #f3f4ee;
@@ -62,7 +63,7 @@ export const NavItem = styled.li`
   list-style: none;
 `
 
-export const NavLink = styled.a`
+export const NavLinkStyled = styled(NavLink)`
   color: #3b3b3b;
   text-decoration: none;
   padding: 6px 15px;

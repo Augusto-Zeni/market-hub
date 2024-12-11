@@ -10,6 +10,7 @@ const Input = ({
   borderColorHover = '#3b3b3b',
   shadowColor = '',
   type = 'text',
+  ...props
 }) => {
   return (
     <Container
@@ -19,7 +20,7 @@ const Input = ({
       $borderRadius={borderRadius}
       style={style}
     >
-      <InputBox id={id} type={type} placeholder={placeholder} />
+      <InputBox id={id} type={type} placeholder={placeholder} {...props} />
     </Container>
   )
 }

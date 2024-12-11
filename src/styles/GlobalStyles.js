@@ -14,6 +14,7 @@ const GlobalStyles = createGlobalStyle`
         overflow-x: hidden;
         background-color: #F3F4EE;
         color: #3b3b3b;
+        -webkit-font-smoothing: antialiased;
     }
 `
 

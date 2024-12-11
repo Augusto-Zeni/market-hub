@@ -21,4 +21,8 @@ export const ButtonComponent = styled.button`
     background: transparent;
     color: #44bb01;
   }
+
+  &:disabled {
+    opacity: .7;
+  }
 `

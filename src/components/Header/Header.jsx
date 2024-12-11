@@ -1,6 +1,8 @@
+import { logout } from '@/api/logout'
 import GreenLogoIcon from '@/assets/icons/LogoIcon/GreenLogoIcon'
-import LoginModal from '@/containers/LoginModal/LoginModal'
-import { useState } from 'react'
+import { useAuth } from '@/contexts/AuthContext'
+import { useLocation } from 'react-router-dom'
+import { toast } from 'sonner'
 import {
   ContainerLogo,
   HeaderContainer,
@@ -9,15 +11,25 @@ import {
   Nav,
   NavContainer,
   NavItem,
-  NavLink,
+  NavLinkStyled,
   NavList,
 } from './styles/Header.style'
 
 const Header = () => {
-  const [open, setOpen] = useState(false)
+  const location = useLocation()
+  
+  const { getUserType } = useAuth()
 
-  const handleClickOpen = () => {
-    setOpen(true)
+  const handleLogout = async () => {
+    try {
+      await logout()
+
+      localStorage.removeItem('userContext - market hub')
+
+      toast.success('Logout efetuado com sucesso.')
+    } catch {
+      toast.error('Ops! Algo de errado aconteceu, tente novamente.')
+    }
   }
 
   return (
@@ -31,17 +43,33 @@ const Header = () => {
             <LogoText>MarketHub</LogoText>
           </ContainerLogo>
         </NavContainer>
-        <NavList>
-          <NavItem>
-            <NavLink onClick={handleClickOpen}>Acessar / Registrar-se</NavLink>
-          </NavItem>
-          <NavItem>
-            <NavLink href="#">Oferecer um serviço</NavLink>
-          </NavItem>
-        </NavList>
+        {location.pathname !== '/sign-in' && location.pathname !== '/sign-up' && (
+          <NavList>
+            {getUserType === 'MERCHANT' && (
+              <NavItem>
+                <NavLinkStyled to="/service">Oferecer um serviço</NavLinkStyled>
+              </NavItem>
+            )}
+            <NavItem>
+              <NavLinkStyled to="/sign-in" onClick={handleLogout}>Logout</NavLinkStyled>
+            </NavItem>
+          </NavList>
+        )}
+        {location.pathname === '/sign-in' && (
+          <NavList>
+            <NavItem>
+              <NavLinkStyled to="/sign-up">Registrar-se</NavLinkStyled>
+            </NavItem>
+          </NavList>
+        )}
+        {location.pathname === '/sign-up' && (
+          <NavList>
+            <NavItem>
+              <NavLinkStyled to="/sign-in">Login</NavLinkStyled>
+            </NavItem>
+          </NavList>
+        )}
       </Nav>
-
-      <LoginModal open={open} setOpen={isOpen => setOpen(isOpen)} />
     </HeaderContainer>
   )
 }

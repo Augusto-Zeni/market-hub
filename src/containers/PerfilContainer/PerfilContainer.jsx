@@ -172,7 +172,7 @@ const comentariosInfos = [
   },
 ]
 
-const AuditionsAndMediaGallery = () => {
+const PerfilContainer = () => {
   return (
     <Container>
       <ProfileSideBar>
@@ -266,4 +266,4 @@ const AuditionsAndMediaGallery = () => {
   )
 }
 
-export default AuditionsAndMediaGallery
+export default PerfilContainer

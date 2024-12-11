@@ -74,6 +74,7 @@ class RegisterController extends Controller
             return response()->json([
                 'message' => 'User registered!',
                 'data' => [
+                    'id' => $user->id,
                     'name' => $user->name,
                     'email' => $user->email,
                     'user_type' => $user->user_type,
