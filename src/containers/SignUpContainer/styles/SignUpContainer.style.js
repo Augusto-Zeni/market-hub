@@ -28,7 +28,7 @@ export const RightContainer = styled.div`
   justify-content: center;
 `
 
-export const ContainerLoginFormModal = styled.div`
+export const ContainerLoginForm = styled.div`
   flex: 1;
   color: #3b3b3b;
 `

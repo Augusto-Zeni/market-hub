@@ -6,7 +6,7 @@ import { Field, Form, Formik } from 'formik'
 import { useNavigate } from 'react-router-dom'
 import { toast } from 'sonner'
 import { signInValidationSchema } from './signInSchema'
-import { Container, ContainerError, ContainerLoginFormModal, ContentLoginForm, ErrorMsg, LeftContainer, RightContainer, Title } from './styles/SignInContainer.style'
+import { Container, ContainerError, ContainerLoginForm, ContentLoginForm, ErrorMsg, LeftContainer, RightContainer, Title } from './styles/SignInContainer.style'
 
 export function SignInContainer() {
   const navigate = useNavigate()
@@ -32,7 +32,7 @@ export function SignInContainer() {
     <Container>
       <LeftContainer />
       <RightContainer>
-          <ContainerLoginFormModal>
+          <ContainerLoginForm>
             <ContentLoginForm>
                 <Formik
                   initialValues={{ email: '', password: '' }}
@@ -81,14 +81,14 @@ export function SignInContainer() {
                       <Button
                         id="login-button" 
                         text="Login"
-                        type="button"
+                        type="submit"
                         disabled={isSubmitting}
                       />
                     </Form>
                   )}
                 </Formik>
             </ContentLoginForm>
-          </ContainerLoginFormModal>
+          </ContainerLoginForm>
       </RightContainer>
     </Container>
   )

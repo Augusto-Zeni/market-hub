@@ -24,7 +24,7 @@ const Header = () => {
     try {
       await logout()
 
-      localStorage.removeItem('userContext - market hub')
+      localStorage.removeItem('userContext-market-hub')
 
       toast.success('Logout efetuado com sucesso.')
     } catch {
@@ -45,6 +45,9 @@ const Header = () => {
         </NavContainer>
         {location.pathname !== '/sign-in' && location.pathname !== '/sign-up' && (
           <NavList>
+            <NavItem>
+              <NavLinkStyled to="/profile">Meu Perfil</NavLinkStyled>
+            </NavItem>
             {getUserType === 'MERCHANT' && (
               <NavItem>
                 <NavLinkStyled to="/service">Oferecer um serviço</NavLinkStyled>

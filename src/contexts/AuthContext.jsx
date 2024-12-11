@@ -5,7 +5,7 @@ const AuthContext = createContext()
 
 export const AuthProvider = ({ children }) => {
   const [userData, setUserData] = useState(() => {
-    const storedData = localStorage.getItem('userContext - market hub')
+    const storedData = localStorage.getItem('userContext-market-hub')
     return storedData ? JSON.parse(storedData) : null
   })
 
@@ -14,9 +14,7 @@ export const AuthProvider = ({ children }) => {
   const getUserType = useMemo(() => userData?.user_type, [userData])
 
   useEffect(() => {
-    console.log('userData', userData)
-
-    localStorage.setItem('userContext - market hub', JSON.stringify({
+    localStorage.setItem('userContext-market-hub', JSON.stringify({
       id: userData?.id,
       user_type: userData?.user_type,
       token: userData?.access_token || userData?.token

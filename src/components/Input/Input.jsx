@@ -1,5 +1,5 @@
 import PropTypes from 'prop-types'
-import { Container, InputBox } from './styles/Input.style'
+import { Container, InputBox, InputMaskStyled } from './styles/Input.style'
 
 const Input = ({
   id = 'input',
@@ -10,6 +10,7 @@ const Input = ({
   borderColorHover = '#3b3b3b',
   shadowColor = '',
   type = 'text',
+  mask = false,
   ...props
 }) => {
   return (
@@ -20,7 +21,17 @@ const Input = ({
       $borderRadius={borderRadius}
       style={style}
     >
-      <InputBox id={id} type={type} placeholder={placeholder} {...props} />
+      {mask ? (
+        <InputMaskStyled
+          id={id}
+          type={type}
+          mask="(99) 99999-9999"
+          placeholder={placeholder}
+          {...props}
+        />
+      ) : (
+        <InputBox id={id} type={type} placeholder={placeholder} {...props} />
+      )}
     </Container>
   )
 }
@@ -35,6 +46,7 @@ Input.propTypes = {
   borderColorHover: PropTypes.string,
   shadowColor: PropTypes.string,
   type: PropTypes.string,
+  mask: PropTypes.bool,
 }
 
 export default Input

@@ -1,6 +1,7 @@
 import { signUp } from '@/api/sign-up'
 import Button from '@/components/Button/Button'
 import Input from '@/components/Input/Input'
+import { Textarea } from '@/components/Textarea/Textarea'
 import { useAuth } from '@/contexts/AuthContext'
 import { Checkbox } from '@mui/material'
 import { Field, Form, Formik } from 'formik'
@@ -8,7 +9,7 @@ import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { toast } from 'sonner'
 import { signupValidationSchema } from './signUpSchema'
-import { Container, ContainerError, ContainerLoginFormModal, ContentLoginForm, ErrorMsg, FormControlLabelStyled, LeftContainer, RightContainer, Title } from './styles/SignUpContainer.style'
+import { Container, ContainerError, ContainerLoginForm, ContentLoginForm, ErrorMsg, FormControlLabelStyled, LeftContainer, RightContainer, Title } from './styles/SignUpContainer.style'
 
 export function SignUpContainer() {
   const [isMerchant, setIsMerchant] = useState(false)
@@ -22,6 +23,10 @@ export function SignUpContainer() {
         name: values.fullName,
         email: values.email,
         password: values.password,
+        cellphone: values.cellphone?.replace(/\D/g, ''),
+        city: values.city,
+        state: values.state,
+        about: values.about,
         userType: isMerchant ? 'MERCHANT' : 'CONSUMER'
       })
 
@@ -44,7 +49,7 @@ export function SignUpContainer() {
     <Container>
       <LeftContainer />
       <RightContainer>
-          <ContainerLoginFormModal>
+          <ContainerLoginForm>
             <ContentLoginForm>
                 <Formik
                   initialValues={{ fullName: '', email: '', password: '' }}
@@ -88,6 +93,25 @@ export function SignUpContainer() {
                       
                       <Field
                         as={Input}
+                        name="cellphone"
+                        id="cellphone-cadastrar"
+                        type="text"
+                        placeholder="Telefone"
+                        borderColor="#44BB01"
+                        borderColorHover="#44BB01"
+                        shadowColor="#44bb0142"
+                        style={{ margin: errors.cellphone && touched.cellphone ? '.3rem 0' : '1rem 0', height: 40, padding: 5 }}   
+                        borderRadius={15}
+                        mask
+                      />
+                      {errors.cellphone && touched.cellphone && (
+                        <ContainerError>
+                          <ErrorMsg>{errors.cellphone}</ErrorMsg>
+                        </ContainerError>
+                      )}
+                      
+                      <Field
+                        as={Input}
                         name="password"
                         id="password-cadastrar"
                         type="password"
@@ -104,24 +128,80 @@ export function SignUpContainer() {
                         </ContainerError>
                       )}
 
-
-                      <FormControlLabelStyled
-                        control={
-                          <Checkbox
-                            checked={isMerchant}
-                            onChange={handleChangeIsMerchant}
-                            inputProps={{ 'aria-label': 'controlled' }}
-                            sx={{
-                              color: '#44bb01',
-                              fontWeight: 300,
-                              '&.Mui-checked': {
-                                color: '#44bb01',
-                              },
-                            }}
-                          />
-                        }
-                        label="Sou um prestador de serviços"
+                      <Field
+                        as={Input}
+                        name="city"
+                        id="city-cadastrar"
+                        type="text"
+                        placeholder="Cidade"
+                        borderColor="#44BB01"
+                        borderColorHover="#44BB01"
+                        shadowColor="#44bb0142"
+                        style={{ margin: errors.city && touched.city ? '.3rem 0' : '1rem 0', height: 40, padding: 5 }}   
+                        borderRadius={15}
                       />
+                      {errors.city && touched.city && (
+                        <ContainerError>
+                          <ErrorMsg>{errors.city}</ErrorMsg>
+                        </ContainerError>
+                      )}
+
+                      <Field
+                        as={Input}
+                        name="state"
+                        id="state-cadastrar"
+                        type="text"
+                        placeholder="Estado"
+                        borderColor="#44BB01"
+                        borderColorHover="#44BB01"
+                        shadowColor="#44bb0142"
+                        style={{ margin: errors.state && touched.state ? '.3rem 0' : '1rem 0', height: 40, padding: 5 }}   
+                        borderRadius={15}
+                      />
+                      {errors.state && touched.state && (
+                        <ContainerError>
+                          <ErrorMsg>{errors.state}</ErrorMsg>
+                        </ContainerError>
+                      )}
+
+                      <Field
+                        as={Textarea}
+                        name="about"
+                        id="about-cadastrar"
+                        type="text"
+                        placeholder="Comente algo sobre você ou seu serviço"
+                        borderColor="#44BB01"
+                        borderColorHover="#44BB01"
+                        shadowColor="#44bb0142"
+                        borderRadius={15}
+                        rows="3"
+                        cols="50"
+                      />
+                      {errors.about && touched.about && (
+                        <ContainerError>
+                          <ErrorMsg>{errors.about}</ErrorMsg>
+                        </ContainerError>
+                      )}
+
+                      <div>
+                        <FormControlLabelStyled
+                          control={
+                            <Checkbox
+                              checked={isMerchant}
+                              onChange={handleChangeIsMerchant}
+                              inputProps={{ 'aria-label': 'controlled' }}
+                              sx={{
+                                color: '#44bb01',
+                                fontWeight: 300,
+                                '&.Mui-checked': {
+                                  color: '#44bb01',
+                                },
+                              }}
+                            />
+                          }
+                          label="Sou um prestador de serviços"
+                        />
+                      </div>
                       
                       <Button 
                         id="cadastrar-button" 
@@ -134,7 +214,7 @@ export function SignUpContainer() {
                   )}
                 </Formik>
             </ContentLoginForm>
-          </ContainerLoginFormModal>
+          </ContainerLoginForm>
       </RightContainer>
     </Container>
   )

@@ -32,11 +32,15 @@ class RegisterController extends Controller
      *     @OA\RequestBody(
      *         required=true,
      *         @OA\JsonContent(
-     *             required={"name", "email", "password", "consumer_type"},
+     *             required={"name", "email", "password", "user_type"},
      *             @OA\Property(property="name", type="string", example="João Silva"),
      *             @OA\Property(property="email", type="string", example="joao@example.com"),
+     *             @OA\Property(property="cellphone", type="string", example="51123451234"),
+     *             @OA\Property(property="city", type="string", example="Lajeado"),
+     *             @OA\Property(property="state", type="string", example="RS"),
+     *             @OA\Property(property="about", type="string", example="teste teste teste teste teste"),
      *             @OA\Property(property="password", type="string", example="senhaSegura123"),
-     *             @OA\Property(property="consumer_type", type="string", example="CONSUMER")
+     *             @OA\Property(property="user_type", type="string", example="CONSUMER")
      *         )
      *     ),
      *     @OA\Response(
@@ -57,13 +61,17 @@ class RegisterController extends Controller
         $request->validate([
             'name' => 'required',
             'email' => 'required|email',
+            'cellphone' => 'required',
+            'city' => 'required',
+            'state' => 'required',
+            'about' => 'required',
             'password' => 'required',
             'user_type' => 'required',
         ]);
 
         try {
             $user = $this->service->register(
-                $request->only(['name', 'email', 'password', 'user_type'])
+                $request->only(['name', 'email', 'cellphone', 'city', 'state', 'about', 'password', 'user_type'])
             );
 
             $token = $user->createToken(
@@ -77,6 +85,10 @@ class RegisterController extends Controller
                     'id' => $user->id,
                     'name' => $user->name,
                     'email' => $user->email,
+                    'cellphone' => $user->cellphone,
+                    'city' => $user->city,
+                    'state' => $user->state,
+                    'about' => $user->about,
                     'user_type' => $user->user_type,
                     'access_token' => $token,
                     'token_type' => 'Bearer',

@@ -16,9 +16,9 @@ function App() {
       error => {
         if (isAxiosError(error)) {
           const status = error.response?.status
-          const code = error.response?.data.code
+          const error = error.response?.data.message
 
-          if (status === 401 && code === 'UNAUTHORIZED') {
+          if (status === 401 && error === 'Unauthenticated.') {
             navigate('sign-in', { replace: true })
           } else {
             throw error

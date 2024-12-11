@@ -1,5 +1,6 @@
-import styled from 'styled-components'
 import isNil from 'lodash/isNil'
+import InputMask from 'react-input-mask'
+import styled from 'styled-components'
 
 export const Container = styled.div`
   background-color: white;
@@ -35,3 +36,16 @@ export const InputBox = styled.input`
     color: #3b3b3b;
   }
 `
+
+export const InputMaskStyled = styled(InputMask)`
+  border: none;
+  outline: none;
+  padding-left: 5px;
+  width: 100%;
+  background: transparent;
+  color: #3b3b3b;
+
+  &:focus {
+    color: #3b3b3b;
+  }
+` 
