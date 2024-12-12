@@ -1,15 +1,18 @@
+import { getServicesProfile } from '@/api/get-services-profile'
 import { updateProfile } from '@/api/update-profile'
+import { uploadImgProfile } from '@/api/upload-img-profile'
 import Avaliacoes from '@/components/Avaliacoes/Avaliacoes'
 import Comentario from '@/components/Comentario/Comentario'
 import Input from '@/components/Input/Input'
 import { InputPhone } from '@/components/InputPhone/InputPhone'
 import ServiceCard from '@/components/ServiceCard/ServiceCard'
 import TitleWithLine from '@/components/TitleWithLine/TitleWithLine'
+import { useAuth } from '@/contexts/AuthContext'
 import { formatarTelefone } from '@/utils/formatPhone'
 import isEmpty from 'lodash/isEmpty'
 import map from 'lodash/map'
 import PropTypes from 'prop-types'
-import { useCallback, useMemo, useState } from 'react'
+import { useCallback, useEffect, useMemo, useState } from 'react'
 import { useLocation } from 'react-router-dom'
 import { toast } from 'sonner'
 import 'swiper/css'
@@ -25,7 +28,10 @@ import {
   ContainerPencilIcon,
   CoverImg,
   FooterProfileSideBar,
+  HiddenInput,
+  HoverOverlay,
   InfosProfile,
+  LabelUploadImg,
   ProfileImg,
   ProfileSideBar,
   ProfilMain,
@@ -47,15 +53,39 @@ import {
   WithoutServices,
 } from './styles/PerfilContainer.style'
 
-const PerfilContainer = ({ profile, services, stars, reviews }) => {
+const PerfilContainer = ({ profile, stars, reviews }) => {
   const location = useLocation()
+  const { getUserId } = useAuth()
 
   const [isEditingEmail, setIsEditingEmail] = useState(false)
   const [email, setEmail] = useState(profile?.email)
   const [isEditingPhone, setIsEditingPhone] = useState(false)
   const [phone, setPhone] = useState(profile?.phone)
+  const [imagePreview, setImagePreview] = useState(profile?.image_url)
+  const [servicesState, setServicesState] = useState([])
 
   const isMyProfile = useMemo(() => location.pathname === '/my-profile', [location])
+
+  const handleImageChange = async (e) => {
+    try {
+      const file = e.target.files[0]
+      if (!file) return
+
+      const formData = new FormData()
+      formData.append('image', file)
+
+      const response = await uploadImgProfile({ id: profile?.id, formData })
+
+      setImagePreview(response.image_url)
+
+      toast.success("Imagem de perfil atualizada com sucesso.")
+    } catch (error) {
+      console.error(error)
+      setImagePreview(null)
+      toast.error("Ops! Algo de errado aconteceu, tente novamente.")
+    }
+  }
+
 
   const handleClickEditEmail = () => {
     setIsEditingEmail((prev) => !prev)
@@ -109,13 +139,34 @@ const PerfilContainer = ({ profile, services, stars, reviews }) => {
     }
   }, [email, setIsEditingEmail, setEmail, phone, setIsEditingPhone,setPhone, profile])
 
+  const getServices = async () => {
+    const response = await getServicesProfile({ id: getUserId })
+
+    setServicesState(response.data)
+  }
+
+  useEffect(() => {
+    getServices()
+  }, [])
+
   return (
     <Container>
       <ProfileSideBar>
         <CoverImg />
 
         <ContainerImgProfile>
-          <ProfileImg src="../../../profile-image.png" />
+          <ProfileImg src={imagePreview || profile?.image_url || "../../../undefined-profile-img.png"} />
+          <LabelUploadImg htmlFor="imageUpload">
+            <HiddenInput
+              id="imageUpload"
+              type="file"
+              accept="image/*"
+              onChange={handleImageChange}
+            />
+            <HoverOverlay>
+              Alterar Imagem
+            </HoverOverlay>
+          </LabelUploadImg>
         </ContainerImgProfile>
 
         <FooterProfileSideBar>
@@ -232,11 +283,12 @@ const PerfilContainer = ({ profile, services, stars, reviews }) => {
 
         <CarouselContainer>
           <Swiper slidesPerView={2} spaceBetween={10}>
-            {!isEmpty(services) ? (
+            {!isEmpty(servicesState) ? (
               <>
-                {map(services, service => (
+                {map(servicesState, service => (
                   <SwiperSlide key={service?.id}>
                     <ServiceCard
+                      getServices={() => getServices()}
                       cardInfos={{
                         id: service?.id,
                         serviceName: service?.description,
@@ -305,7 +357,6 @@ const PerfilContainer = ({ profile, services, stars, reviews }) => {
 
 PerfilContainer.propTypes = {
   profile: PropTypes.object,
-  services: PropTypes.array,
   stars: PropTypes.object,
   reviews: PropTypes.array,
 }

@@ -1,4 +1,4 @@
-import { ArrowUpRight, MapPin, Star } from 'lucide-react'
+import { ArrowUpRight, MapPin, Star, Trash } from 'lucide-react'
 import styled from 'styled-components'
 
 export const CardContainer = styled.div`
@@ -29,7 +29,7 @@ export const ImageContainer = styled.div`
 
 export const Image = styled.img`
   width: 100%;
-  height: 80%;
+  height: 87%;
   object-fit: cover;
   border-radius: 32px;
 `
@@ -157,4 +157,29 @@ export const StyledArrowUpRight = styled(ArrowUpRight)`
 export const CardWrapper = styled.div`
   padding: 1rem;
   position: relative;
+`
+
+export const ActionsBadge = styled.div`
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  background: #ffffff47;
+  backdrop-filter: blur(4px);
+  padding: 0.25rem 0.75rem;
+  border-radius: 9999px;
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+  z-index: 1;
+  transition: background 0.2s ease-in-out;
+
+  &:hover {
+    background: #52525247;
+  }
+`
+
+export const StyledTrash = styled(Trash)`
+  width: 1rem;
+  height: 1rem;
+  color: red;
 `

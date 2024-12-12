@@ -14,7 +14,7 @@ const Comentario = ({ nome, avaliacao, comentario }) => {
   return (
     <Container>
       <AvatarContainer>
-        <Avatar src="/../../profile-image.png" alt="img-avatar-comentario" />
+        <Avatar src="/../../undefined-profile-img.png" alt="img-avatar-comentario" />
 
         <Name>{nome}</Name>
 

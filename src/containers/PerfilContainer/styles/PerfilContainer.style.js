@@ -30,13 +30,6 @@ export const CoverImg = styled.div`
   object-fit: cover;
 `
 
-export const ContainerImgProfile = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  margin-top: calc(0px - 5rem);
-`
-
 export const ProfileImg = styled.img`
   box-sizing: initial;
   width: 10rem;
@@ -196,4 +189,45 @@ export const StyledClose = styled(X)`
   width: 1rem;
   height: 1rem;
   color: #44bb01;
+`
+
+export const HiddenInput = styled.input`
+  display: none;
+`
+
+export const HoverOverlay = styled.div`
+  position: absolute;
+  top: 0;
+  width: 10rem;
+  height: 10rem;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: rgb(69 69 69 / 55%);
+  color: white;
+  font-size: 0.875rem;
+  font-weight: 500;
+  cursor: pointer;
+`
+
+export const ContainerImgProfile = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: calc(0px - 5rem);
+  position: relative;
+`
+
+export const LabelUploadImg = styled.label`
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  opacity: 0;
+  transition: opacity 0.3s ease-in-out;
+  
+  &:hover {
+    opacity: 1;
+  }
 `

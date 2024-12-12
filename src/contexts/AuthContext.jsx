@@ -13,6 +13,8 @@ export const AuthProvider = ({ children }) => {
 
   const getUserType = useMemo(() => userData?.user_type, [userData])
 
+  const getUserToken = useMemo(() => userData?.token, [userData])
+
   useEffect(() => {
     localStorage.setItem('userContext-market-hub', JSON.stringify({
       id: userData?.id,
@@ -22,7 +24,7 @@ export const AuthProvider = ({ children }) => {
   }, [userData])
 
   return (
-    <AuthContext.Provider value={{ userData, setUserData, getUserId, getUserType }}>
+    <AuthContext.Provider value={{ userData, setUserData, getUserId, getUserType, getUserToken }}>
       {children}
     </AuthContext.Provider>
   )
