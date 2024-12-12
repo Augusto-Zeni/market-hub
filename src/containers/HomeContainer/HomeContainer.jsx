@@ -6,6 +6,8 @@ import ServiceCard from '@/components/ServiceCard/ServiceCard'
 import TitleWithLine from '@/components/TitleWithLine/TitleWithLine'
 import { useQuery } from '@tanstack/react-query'
 import map from 'lodash/map'
+import { useState } from 'react'
+import { useNavigate } from 'react-router-dom'
 import {
   BannerContainer,
   ButtonContainer,
@@ -18,12 +20,15 @@ import {
 } from './styles/HomeContainer.style'
 
 const HomeContainer = () => {
+  const navigate = useNavigate()
+  
+  // const [searchParams, setSearchParams] = useSearchParams()
+  const [search, setSerch] = useState('')
+
   const { data: result } = useQuery({
     queryKey: ['feed-home'],
-    queryFn: () => getFeedHome(),
+    queryFn: () => getFeedHome({ page: 1, search: null }),
   })
-
-  console.log(result?.data)
 
   return (
     <Container>
@@ -44,8 +49,20 @@ const HomeContainer = () => {
             borderColorHover="#44BB01"
             shadowColor="#44bb0142"
             style={{ marginLeft: '1rem', width: '20rem', height: '3.12rem', padding: 5, background: '#fff' }}
+            value={search}
+            onChange={(e) => setSerch(e.target.value)}
           />
-          <Button id="cadastrar-button" text="Pesquisar" style={{ width: '8rem' }} />
+          <Button
+            id="cadastrar-button"
+            text="Pesquisar"
+            style={{ width: '8rem' }}
+            onClick={() => {
+              navigate({
+                pathname: '/services',
+                search: `search=${search.toString()}`,
+              })
+            }}
+          />
         </FormSearch>
       </BannerContainer>
 
@@ -68,7 +85,12 @@ const HomeContainer = () => {
       </CardsContainer>
       <ButtonContainer>
         <Line />
-        <Button id="mostrar-mais-services" text="Mostrar Mais" style={{ width: '8rem', margin: '0 1rem' }} />
+        <Button
+          id="mostrar-mais-services"
+          text="Mostrar Mais"
+          style={{ width: '8rem', margin: '0 1rem' }}
+          onClick={() => navigate('/services')}
+        />
         <Line />
       </ButtonContainer>
     </Container>

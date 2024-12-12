@@ -12,6 +12,7 @@ const InputIcon = ({
   borderColor = '#3b3b3b',
   borderColorHover = '#3b3b3b',
   shadowColor = '',
+  ...props
 }) => {
   return (
     <Container
@@ -22,7 +23,7 @@ const InputIcon = ({
       style={style}
     >
       <Icon width={`${iconSize}px`} height={`${iconSize}px`} fill={fill} />
-      <InputBox id={id} placeholder={placeholder} />
+      <InputBox id={id} placeholder={placeholder} {...props} />
     </Container>
   )
 }

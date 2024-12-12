@@ -1,9 +1,10 @@
 import { api } from '@/lib/axios'
 
-export async function getFeedHome() {
+export async function getFeedHome({ page, search }) {
   const response = await api.get('/feed', {
     params: {
-      page: 1,
+      page,
+      search,
       per_page: 12
     }
   })

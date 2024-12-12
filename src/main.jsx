@@ -9,6 +9,7 @@ import { queryClient } from './lib/react-query'
 import Home from './routes/Home'
 import { NewService } from './routes/NewService'
 import Profile from './routes/Profile'
+import { Services } from './routes/Services'
 import { SignIn } from './routes/SignIn'
 import { SignUp } from './routes/SignUp'
 import GlobalStyles from './styles/GlobalStyles'
@@ -37,6 +38,10 @@ const router = createBrowserRouter([
       {
         path: '/new-service',
         element: <NewService />
+      },
+      {
+        path: '/services',
+        element: <Services />
       }
     ]
   }

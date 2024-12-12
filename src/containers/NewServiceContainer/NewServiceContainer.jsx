@@ -45,8 +45,7 @@ export function NewServiceContainer() {
     
           await uploadImgService({ id: response?.id, formData })
         }
-  
-        console.log(values)
+
         toast.success('Serviço criado com sucesso.')
         setSubmitting(false)
       }, [1000])
@@ -170,7 +169,6 @@ export function NewServiceContainer() {
                   setPriceValue(values)
 
                   const numericValue = parseFloat(values?.replace(/[^\d,]/g, '')?.replace(',', '.'))
-                  console.log(values, numericValue)
                   setFieldValue('price', numericValue)
                 }}
               />
