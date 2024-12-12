@@ -1,6 +1,6 @@
-import { Star } from 'lucide-react'
 import LinearProgress from '@mui/material/LinearProgress'
 import style from '@mui/material/styles/styled'
+import { Star } from 'lucide-react'
 import styled from 'styled-components'
 
 export const Container = styled.div`
@@ -39,6 +39,17 @@ export const BarContainer = styled.div`
 
 export const QtdSpan = styled.span`
   margin-left: 0.2rem;
+`
+
+export const WithoutComments = styled.div`
+  padding: 1rem;
+  display: flex;
+  justify-content: center;
+`
+
+export const WithoutLabel = styled.i`
+  font-weight: 300;
+  font-size: 1rem;
 `
 
 export const BorderLinearProgress = style(LinearProgress)(() => ({

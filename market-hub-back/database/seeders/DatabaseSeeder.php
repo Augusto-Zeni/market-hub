@@ -19,10 +19,6 @@ class DatabaseSeeder extends Seeder
         User::factory()->create([
             'name' => 'Lauro Appelt',
             'email' => 'test@example.com',
-            'cellphone' => '51123451234',
-            'about' => 'teste teste teste teste',
-            'city' => 'Lajeado',
-            'state' => 'RS',
             'user_type' => 'CONSUMER',
             'password' => Hash::make('1234')
         ]);
@@ -30,10 +26,6 @@ class DatabaseSeeder extends Seeder
         User::factory()->create([
             'name' => 'João da Silva',
             'email' => 'test1@example.com',
-            'cellphone' => '51123451234',
-            'about' => 'teste teste teste teste',
-            'city' => 'Curitiba',
-            'state' => 'PR',
             'user_type' => 'SELLER',
             'password' => Hash::make('1234')
         ]);

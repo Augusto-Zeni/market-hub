@@ -18,13 +18,6 @@ export const signupValidationSchema = Yup.object().shape({
   about: Yup.string()
     .required('Sobre é obrigatório')
     .min(15, 'Sobre deve ter no mínimo 15 caracteres'),
-  city: Yup.string()
-    .required('Cidade é obrigatório')
-    .min(3, 'Cidade deve ter no mínimo 3 caracteres'),
-  state: Yup.string()
-    .required('Cidade é obrigatório')
-    .min(2, 'Estado deve ter 2 caracteres')
-    .max(2, 'Estado deve ter 2 caracteres'),
   cellphone: Yup.string()
     .required('Telefone é obrigatório')
     .test('isValidTelefone', 'Telefone inválido', telefoneValidator)

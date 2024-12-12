@@ -6,13 +6,11 @@ import {
   ComentarioText,
   Container,
   ContainerInfoTitle,
-  Data,
-  Dot,
   Name,
-  StyledStar,
+  StyledStar
 } from './styles/Comentario.style'
 
-const Comentario = ({ nome, avaliacao, data, comentario }) => {
+const Comentario = ({ nome, avaliacao, comentario }) => {
   return (
     <Container>
       <AvatarContainer>
@@ -24,11 +22,6 @@ const Comentario = ({ nome, avaliacao, data, comentario }) => {
           <StyledStar />
           {avaliacao}
         </ContainerInfoTitle>
-
-        <ContainerInfoTitle>
-          <Dot> • </Dot>
-          <Data>{data}</Data>
-        </ContainerInfoTitle>
       </AvatarContainer>
 
       <ComentarioContainer>
@@ -39,10 +32,9 @@ const Comentario = ({ nome, avaliacao, data, comentario }) => {
 }
 
 Comentario.propTypes = {
-  nome: PropTypes.string.isRequired,
-  avaliacao: PropTypes.number.isRequired,
-  data: PropTypes.string.isRequired,
-  comentario: PropTypes.string.isRequired,
+  nome: PropTypes.string,
+  avaliacao: PropTypes.number,
+  comentario: PropTypes.string,
 }
 
 export default Comentario

@@ -28,8 +28,9 @@ class UserProfileController extends Controller
      *     @OA\RequestBody(
      *         required=true,
      *         @OA\JsonContent(
-     *             required={"user_id", "job_role", "zipcode", "about", "phone"},
+     *             required={"user_id","name", "email", "job_role", "zipcode", "about", "phone"},
      *             @OA\Property(property="user_id", type="int", example="1"),
+     *             @OA\Property(property="email", type="string", example="joao@silva.com"),
      *             @OA\Property(property="job_role", type="string", example="Encanador"),
      *             @OA\Property(property="zipcode", type="string", example="99999999"),
      *             @OA\Property(property="about", type="string", example="texto texto texto texto texto"),
@@ -54,6 +55,8 @@ class UserProfileController extends Controller
     {
         $validated = $request->validate([
             'user_id' => 'required',
+            'name' => 'required|string',
+            'email' => 'required|email',
             'job_role' => 'required|string',
             'zipcode' => 'required|string',
             'about' => 'required|string',
@@ -95,6 +98,8 @@ class UserProfileController extends Controller
      *         required=true,
      *         @OA\JsonContent(
      *             @OA\Property(property="job_role", type="string", example="Encanador"),
+     *             @OA\Property(property="name", type="string", example="João"),
+     *             @OA\Property(property="email", type="string", example="joao@example.com"),
      *             @OA\Property(property="zipcode", type="string", example="99999999"),
      *             @OA\Property(property="about", type="string", example="texto texto texto texto texto"),
      *             @OA\Property(property="phone", type="string", example="51999999999")
@@ -121,6 +126,7 @@ class UserProfileController extends Controller
             'zipcode' => 'sometimes|string',
             'about' => 'sometimes|string',
             'phone' => 'sometimes|string',
+            'email' => 'sometimes|string',
         ]);
 
         try {
@@ -181,6 +187,8 @@ class UserProfileController extends Controller
                 'data' => $userProfile,
             ], 200);
         } catch (Throwable $th) {
+            var_dump($user_id);
+            var_dump($th->getMessage());
             Log::error($th->getMessage(), []);
 
             return response([

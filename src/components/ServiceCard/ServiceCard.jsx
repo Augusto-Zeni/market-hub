@@ -29,20 +29,24 @@ const HotelCard = ({ cardInfos, hasBoxShadow = true }) => {
           ) : (
             <WhitoutImage />
           )}
-          <RatingBadge>
-            <StyledStar />
-            <RatingText>{cardInfos.raiting === 0 ? '-' : cardInfos.raiting}</RatingText>
-          </RatingBadge>
+          {cardInfos.raiting && (
+            <RatingBadge>
+              <StyledStar />
+              <RatingText>{cardInfos.raiting === 0 ? '-' : cardInfos.raiting}</RatingText>
+            </RatingBadge>
+          )}
         </ImageContainer>
 
         <ContentContainer>
           <ContentWrapper>
             <InfoContainer>
               <Title>{cardInfos.serviceName}</Title>
-              <Location>
-                <StyledMapPin />
-                <span>{cardInfos.location}</span>
-              </Location>
+              {cardInfos.location && (
+                <Location>
+                  <StyledMapPin />
+                  <span>{cardInfos.location}</span>
+                </Location>
+              )}
               <Price>
                 {cardInfos.price.toLocaleString('pt-BR', {
                     style: 'currency',

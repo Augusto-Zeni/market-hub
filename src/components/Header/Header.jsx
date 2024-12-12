@@ -46,7 +46,7 @@ const Header = () => {
         {location.pathname !== '/sign-in' && location.pathname !== '/sign-up' && (
           <NavList>
             <NavItem>
-              <NavLinkStyled to="/profile">Meu Perfil</NavLinkStyled>
+              <NavLinkStyled to="/my-profile">Meu Perfil</NavLinkStyled>
             </NavItem>
             {getUserType === 'MERCHANT' && (
               <NavItem>

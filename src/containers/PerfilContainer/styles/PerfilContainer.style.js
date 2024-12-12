@@ -1,4 +1,4 @@
-import { BriefcaseBusiness, Star, MapPin } from 'lucide-react'
+import { BriefcaseBusiness, Check, MapPin, Pencil, Star, X } from 'lucide-react'
 import styled from 'styled-components'
 
 export const Container = styled.div`
@@ -142,4 +142,58 @@ export const ComentariosContainer = styled.div`
   flex-direction: column;
   gap: 1rem;
   padding: 1rem;
+`
+
+export const WithoutServices = styled.div`
+  height: 20rem;
+  padding: 1rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+`
+
+export const WithoutComments = styled.div`
+  padding: 1rem;
+  display: flex;
+  justify-content: center;
+`
+
+export const WithoutLabel = styled.i`
+  font-weight: 300;
+  font-size: 1rem;
+`
+
+export const ContainerEdit = styled.div`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+`
+
+export const ContainerPencilIcon = styled.div`
+  border-radius: 9999999px;
+  display: flex;
+  padding: .35rem;
+  cursor: pointer;
+
+  &:hover {
+    background: #e4e4e4;
+  }
+`
+
+export const StyledPencil = styled(Pencil)`
+  width: 1rem;
+  height: 1rem;
+  color: #44bb01;
+`
+
+export const StyledCheck = styled(Check)`
+  width: 1rem;
+  height: 1rem;
+  color: #44bb01;
+`
+
+export const StyledClose = styled(X)`
+  width: 1rem;
+  height: 1rem;
+  color: #44bb01;
 `

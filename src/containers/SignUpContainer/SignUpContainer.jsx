@@ -27,8 +27,6 @@ export function SignUpContainer() {
         email: values.email,
         password: values.password,
         cellphone: values.cellphone?.replace(/\D/g, ''),
-        city: values.city,
-        state: values.state,
         about: values.about,
         userType: isMerchant ? 'MERCHANT' : 'CONSUMER'
       })
@@ -37,6 +35,8 @@ export function SignUpContainer() {
 
       setTimeout(async () => {
         await createProfile({
+          name: values.fullName,
+          email: values.email,
           userId: response.id,
           about: values.about,
           jobRole: values.job,
@@ -138,42 +138,6 @@ export function SignUpContainer() {
                       {errors.password && touched.password && (
                         <ContainerError>
                           <ErrorMsg>{errors.password}</ErrorMsg>
-                        </ContainerError>
-                      )}
-
-                      <Field
-                        as={Input}
-                        name="city"
-                        id="city-cadastrar"
-                        type="text"
-                        placeholder="Cidade"
-                        borderColor="#44BB01"
-                        borderColorHover="#44BB01"
-                        shadowColor="#44bb0142"
-                        style={{ margin: errors.city && touched.city ? '.3rem 0' : '1rem 0', height: 40, padding: 5 }}   
-                        borderRadius={15}
-                      />
-                      {errors.city && touched.city && (
-                        <ContainerError>
-                          <ErrorMsg>{errors.city}</ErrorMsg>
-                        </ContainerError>
-                      )}
-
-                      <Field
-                        as={Input}
-                        name="state"
-                        id="state-cadastrar"
-                        type="text"
-                        placeholder="Estado"
-                        borderColor="#44BB01"
-                        borderColorHover="#44BB01"
-                        shadowColor="#44bb0142"
-                        style={{ margin: errors.state && touched.state ? '.3rem 0' : '1rem 0', height: 40, padding: 5 }}   
-                        borderRadius={15}
-                      />
-                      {errors.state && touched.state && (
-                        <ContainerError>
-                          <ErrorMsg>{errors.state}</ErrorMsg>
                         </ContainerError>
                       )}
 

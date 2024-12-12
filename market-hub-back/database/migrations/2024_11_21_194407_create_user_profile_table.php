@@ -14,6 +14,8 @@ return new class extends Migration
         Schema::create('user_profile', function (Blueprint $table) {
             $table->id();
             $table->integer('user_id');
+            $table->string('name');
+            $table->string('email');
             $table->string('job_role', 255);
             $table->string('zipcode', 8);
             $table->string('location', 255);
