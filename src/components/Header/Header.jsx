@@ -50,7 +50,7 @@ const Header = () => {
             </NavItem>
             {getUserType === 'MERCHANT' && (
               <NavItem>
-                <NavLinkStyled to="/service">Oferecer um serviço</NavLinkStyled>
+                <NavLinkStyled to="/new-service">Oferecer um serviço</NavLinkStyled>
               </NavItem>
             )}
             <NavItem>

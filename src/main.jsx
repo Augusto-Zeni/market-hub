@@ -7,6 +7,7 @@ import App from './App'
 import { AuthProvider } from './contexts/AuthContext'
 import { queryClient } from './lib/react-query'
 import Home from './routes/Home'
+import { NewService } from './routes/NewService'
 import Profile from './routes/Profile'
 import { SignIn } from './routes/SignIn'
 import { SignUp } from './routes/SignUp'
@@ -32,6 +33,10 @@ const router = createBrowserRouter([
       {
         path: '/sign-up',
         element: <SignUp />
+      },
+      {
+        path: '/new-service',
+        element: <NewService />
       }
     ]
   }
